@@ -1,0 +1,1828 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<title>Computer Programming</title>
+
+		<meta name="description" content="Computer Programming in Python">
+		<meta name="author" content="Colm Sloan">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<link rel="stylesheet" href="../reveal/css/reveal.css">
+		<link rel="stylesheet" href="../reveal/css/theme/default.css" id="theme">
+        <link rel="stylesheet" href="../reveal/css/killester.css">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../reveal/lib/css/zenburn.css">
+		<link rel="stylesheet" href="../reveal/lib/css/print/pdf.css">
+		
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="..reveal/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+        
+        <script type="text/javascript" src="../syntaxhighlighter_3.0.83/scripts/shCore.js"></script>
+        <script type="text/javascript" src="../syntaxhighlighter_3.0.83/scripts/shBrushPython.js"></script>
+        <link type="text/css" rel="stylesheet" href="../syntaxhighlighter_3.0.83/styles/shCoreDefault.css"/>
+        <script type="text/javascript">SyntaxHighlighter.all();</script>
+
+		<!--[if lt IE 9]>
+		<script src="../reveal/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+<div class="reveal">
+<div class="slides">
+
+    <section>
+        <h1>Computer Programming in Python</h1>
+        <p><small>by Colm Sloan</small></p>
+    </section>
+    
+    <section id="table-of-contents">
+        <h3>Table of contents</h3>
+        <ol>
+            <li><a href="#/introduction">Introduction</a></li>
+            <li><a href="#/generations">Programming language generations</a></li>
+            <li><a href="#/software">Software</a></li>
+            <li><a href="#/first-program">Our first program</a></li>
+            <li><a href="#/comments">Comments</a></li>
+            <li><a href="#/variables">Variables</a></li>
+            <li><a href="#/arithmetic-operators">Arithmetic operators</a></li>
+            <li><a href="#/user-input">Handling user input</a></li>
+            <li><a href="#/data-types-and-casting">Data types and casting</a></li>
+            <li><a href="#/relational-operators">Relational operators</a></li>
+            <li><a href="#/if-statements">If statements</a></li>
+            <li><a href="#/boolean-operators">Boolean operators</a></li>
+            <li><a href="#/mod-operator">Modulus operator</a></li>
+            <li><a href="#/while-loop">While loops</a></li>
+            <li><a href="#/development-and-data-validation">Development and data validation</a></li>
+            <li><a href="#/for-loops">For loops</a></li>
+            <li><a href="#/syntax-and-semantics">Syntax and semantics</a></li>
+            <li><a href="#/more-exercises">More exercises</a></li>
+        </ol>
+    </section>
+
+<!--    Computer programming is like-->
+    <section id="introduction">
+        <h3>Computer programming is like ...</h3>
+        <h4>architecture</h4>
+        <ul>
+            <li>work is performed based on a specified design</li>
+            <li>late changes in design can have huge implications</li>
+            <li>there are tight resource constraints</li>
+            <li>finished products are ideally intuitive and easy to use</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Computer programming is like ...</h3>
+        <h4>gardening</h4>
+        <ul>
+            <li>systems can grow into a tangled mess if unsupervised</li>
+            <li>there are many simple and useful rules of thumb</li>
+            <li>it's never perfect</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Computer programming is like ...</h3>
+        <h4>poetry</h4>
+        <ul>
+            <li>lots of creativity constrained by a set of rules</li>
+            <li>there are always multiple ways to express the same idea</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Computer programming is like ...</h3>
+        <h4>technical writing</h4>
+        <ul>
+            <li>it should be as simple as possible</li>
+            <li>it should be easy to for the reader to follow</li>
+            <li>it should only include the necessary details</li>
+        </ul>
+    </section>				
+    
+<!--    Definitions-->
+    <section>
+        <h3>What is a program?</h3>
+        <blockquote>
+            A sequence of instructions that a computer can interpret and execute.
+            <cite>WordNet, Princeton</cite>
+        </blockquote>
+    </section>
+    
+    <section>
+        <h3>What is a programming language?</h3>
+        <blockquote>
+            A programming language designed to facilitate the writing of computer programs.
+            <cite>Collins English Dictionary</cite>
+        </blockquote>
+    </section>
+
+<!--    Programming language generations-->
+    <section id="generations">
+        <h3>Programming language generations</h3>
+        <h4>First generation</h4>
+        <ul>
+            <li>machine code (binary or hex)</li>
+            <li>instructions executed directly by the CPU</li>
+            <li>sometimes called "native code"</li>
+        </ul>
+        <img src="./images/first_generation.png" />
+    </section>
+	
+	<section>    
+        <h3>Programming language generations</h3>
+        <h4>First generation strengths</h4>
+        <ul>
+            <li>can be very highly optimized</li>
+        </ul>
+        <h4>First generation weaknesses</h4>
+        <ul>
+            <li>difficult to write</li>
+            <li>very difficult to read and maintain</li>
+            <li>hardware specific</li>
+            <li>can require memory mapping</li>
+        </ul>    
+    </section>
+    
+    <section>
+        <h3>Programming language generations</h3>
+        <h4>Second generation</h4>
+        <ul>
+            <li>language based</li>
+            <li>compare, jump if less than, subtract, return etc.</li>
+            <li>converted to machine code</li>
+			<li>various assembly languages</li>
+        </ul>
+        <img src="./images/second_generation.png" />
+    </section>
+    
+    <section>    
+        <h3>Programming language generations</h3>
+        <h4>Second generation strengths</h4>
+        <ul>
+            <li>can be very highly optimized</li>
+            <li>the use of language makes it easier to understand</li>
+        </ul>
+        <h4>Second generation weaknesses</h4>
+        <ul>
+            <li>quite difficult to write</li>
+            <li>quite difficult to read and maintain</li>
+            <li>hardware specific</li>
+            <li>can require memory mapping</li>
+        </ul>    
+    </section>
+    
+    <section>
+        <h3>Programming language generations</h3>
+        <h4>Third generation</h4>
+        <ul>
+            <li>quite language based</li>
+            <li>high level</li>
+            <li>functions, named variables, structures</li>
+            <li>Python, C, Java</li>
+        </ul>
+        <img src="./images/third_generation.png" />
+    </section>
+    
+    <section>    
+        <h3>Programming language generations</h3>
+        <h4>Third generation strengths</h4>
+        <ul>
+            <li>more structured and readable</li>
+            <li>named variables, functions and structures increase productivity</li>
+            <li>can apply high level patterns and concepts</li>
+            <li>not hardware specific</li>
+            <li>do not require memory mapping</li>
+        </ul>
+        <h4>Third generation weaknesses</h4>
+        <ul>
+            <li>may not be as efficient as low-level languages</li>
+            <li>may require long compilation</li>
+        </ul>    
+    </section>
+    
+    <section>
+        <h3>Programming language generations</h3>
+        <h4>Forth generation</h4>
+        <ul>
+            <li>designed with a particular domain in mind</li>
+            <li>sometimes very language based</li>
+            <li>sometimes graphical</li>
+            <li>functions, named variables, structures</li>
+            <li>SQL, LabView, R</li>
+        </ul>
+        <img src="./images/forth_generation.png" />
+    </section>
+    
+    <section>    
+        <h3>Programming language generations</h3>
+        <h4>Forth generation strengths</h4>
+        <ul>
+            <li>extremely productive within their domain</li>
+        </ul>
+        <h4>Forth generation weaknesses</h4>
+        <ul>
+            <li>practically if not entirely useless beyond their domain</li>
+        </ul>    
+    </section>
+    
+    <section>
+        <h3>Programming language generation</h3>
+        <h4>Fifth generation</h4>
+        <ul>
+            <li>more declarative than imperative</li>
+            <li>some constraint based</li>
+            <li>solve problems without programmers</li>
+            <li>Prolog, Mercury</li>
+        </ul>
+        <img src="./images/fifth_generation.png" />
+    </section>
+    
+    <section>
+        <h3>Programming language generations</h3>
+        <h4>Fifth generation strengths</h4>
+        <ul>
+            <li>can easily dynamically infer information</li>
+        </ul>
+        <h4>Fifth generation weaknesses</h4>
+        <ul>
+            <li>can take a very long time to set up a problem</li>
+            <li>somewhat limited in their applications</li>
+        </ul>
+    </section>
+    
+    <section id="software">
+        <h3>System Software</h3>
+        <ul>
+            <li>the files and programs that make up an operating system e.g. Windows, Mac OS X, Linux</li>
+            <li>the drivers that interact with the computer hardware</li>
+            <li>provides a platform for application software</li>
+            <li>examples</li>
+            <ul>
+                <li>graphical user interfaces components</li>
+                <li>file managers</li>
+                <li>debuggers, compilers, utitlies</li>
+            </ul>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Application Software</h3>
+        <ul>
+            <li>programs and applications built on top of the system software</li>
+            <li>examples</li>
+            <ul>
+                <li>graphics suites</li>
+                <li>media players</li>
+                <li>accounting software</li>
+                <li>office</li>
+            </ul>
+        </ul>
+        <img src="./images/apps.png" />
+    </section>
+    
+    <section>
+        <h3>System and Application Software Interaction</h3>
+        <figure>
+            <img src="./images/system_app_interaction.png" />
+            <figcaption>source: Webopedia</figcaption>
+        </figure>
+    </section>
+    
+    <section>
+        <h3>Input and Output</h3>
+        <h4>input</h4>
+        <ul>
+            <li>anything that is put into a system or process</li>
+            <li>e.g. command line arguments, source code files, DVDs</li>
+        </ul>
+        <h4>output</h4>
+        <ul>
+            <li>anything that is produced by a system or process</li>
+            <li>e.g. text printed to command prompt and a file being saved</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Compiler</h3>
+        <ul>
+            <li>translates source code into machine code that is saved to a file and can be executed at a later time</li>
+            <li>can optimize code during compilation</li>
+            <li>takes time to compile but fast during execution</li>
+            <li>C and C++ programs need to be compiled</li>
+        </ul>
+        <figure>
+            <img src="./images/compiler.png" />
+            <figcaption>source: differencebetween.info</figcaption>
+        </figure>
+    </section>
+    
+    <section>
+        <h3>Interpreter</h3>
+        <ul>
+            <li>takes source code and executes it on the fly</li>
+            <li>no compile time can mean faster development</li>
+            <li>usually slower than compiled executables</li>
+            <li>Python, Ruby, Lua are interpreted languages</li>
+        </ul>
+        <figure>
+            <img src="./images/interpreter.png" />
+            <figcaption>source: differencebetween.info</figcaption>
+        </figure>
+    </section>
+    
+    <section>
+        <h3>Before we begin</h3>
+        <h4>source control</h4>
+        <ul>
+            <li>git</li>
+            <li>code versioning software</li>
+            <li>bitbucket.com</li>
+        </ul>
+        <h4>style guide</h4>
+        <ul>
+            <li>Google Python style guide</li>
+            <li>http://google-styleguide.googlecode.com/svn/trunk/pyguide.html</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Python</h3>
+        <ul>
+            <li>imperative - stateful</li>
+            <li>doesn't require manual memory management</li>
+            <li>structured - not just jumps</li>
+            <li>case and whitespace sensitive</li>
+            <li>battle tested - 1991</li>
+            <li>beloved language - has won people's choice awards</li>
+            <li>currently 8th most popular language (TIOBE index)</li>
+        </ul>
+        <img src="./images/python_logo.png" />
+    </section>
+
+    <section>
+        <h3>Uses of a code editor</h3>
+        <ul>
+            <li>fast navigation</li>
+            <li>code completion</li>
+            <li>automatic code generation</li>
+            <li>quick refactoring</li>
+            <li>integrated debugging</li>
+            <li>class visualization</li>
+            <li>build automation tools</li>
+            <li>integrated source control</li>
+            <li>tell you about errors and warn you</li>
+            <li>graphical user interface designer</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>In class editor</h3>
+        <img src="./images/notepad_pp_logo.png" />
+        <img src="./images/notepad_pp_python.png" />
+    </section>
+    
+    <section id="first-program">
+        <h3>Our first program</h3>
+        Write the following code into your Notepad++ file and save it as e1.py in a newly created folder named after today's date.
+        <pre class="brush: python">
+print("Hello, World!")
+        </pre>
+    </section>
+    
+    <section>
+        <h3>Our first program</h3>
+        <ol>
+            <li>Click on the Windows "start" button and type "cmd" to open a new command console.</li>
+            <li>Use the "cd" command to "change directory" to the directory in which e1.py was saved.</li>
+            <li>Type "dir" to see the contents of the directory to be sure the file is present.</li>
+            <li>Enter "python e1.py" to run the file. (We assume Python is in the class path.)</li>
+        </ol>
+        <img src="./images/running_python_file.png" />
+    </section>
+    
+    <section>
+        <h3>Our first program</h3>
+<!--        <pre class="brush: python;">-->
+        <pre class="brush: python">
+print("Hello, World!")
+        </pre>
+        <ul>
+            <li>the Python script was executed by the Python interpreter</li>
+            <li>in this instance, it will execute the only line of code in the input file</li>
+            <li>change the sentence and run script again</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>print</h3>
+        <pre class="brush: python">
+print("Hello, World!")
+        </pre>
+        <ul>
+            <li>a function for outputting values to the command console or files</li>
+            <li>parentheses () immediately after the function name</li>
+            <li>input inside the parentheses</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>print</h3>
+        <pre class="brush: python">
+print("Hello, World!")
+print("Good bye.")
+        </pre>
+        <ul>
+            <li>the file is interpretted from top to bottom, left to right</li>
+            <li>there can be multiple lines of code in the executed file</li>
+            <li>print and other function can be executed multiple times</li>
+        </ul>
+    </section>
+    
+    <section id="comments">
+        <h3>Comments</h3>
+<!--        <div style="font-size=8px;">-->
+<!--        <pre class="brush: python;">-->
+        <pre class="brush: python">
+# Author: Colm Sloan
+# Purpose: Print and comment tutorial
+# Date: 13-09-17
+# Lincense: MIT
+
+print("Hello, World!") # prints to console
+print("Good bye.") # prints more
+        </pre>
+<!--            </div>-->
+        <ul>
+            <li>a # symbol causes the interpreter to ignore remainder of line</li>
+            <li>comments should ideally be at the beginning on each file</li>
+            <li>these comment usually include the license, author and date of work</li>
+            <li>comments are also added to improve the understanding of the code</li>
+        </ul>
+    </section>
+    	
+	<section id="variables">
+        <h3>What is a variable?</h3>
+        <blockquote>
+            Something able to change or be adapted.
+            <cite>Oxford Dictionary</cite>
+        </blockquote>
+        <ul>
+            <li>a symbol associated with a value</li>
+            <li>types of variables</li>
+            <li>in Python, a data type and symbol associated with a value held in an address in memory</li>
+            <li>variables in Python are also called "names"</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>assignment operator</h3>
+        <pre class="brush: python">
+my_variable = 3
+        </pre>
+        <ul>
+            <li>declare and initize variable</li>
+            <li><i>declare</i> is to make known the existence of something e.g. a variable</li>
+            <li><i>initialize</i> means to give an initial value</li>
+            <li>my_variable is declared and initialized to a value of 3</li>
+            <li>associates the name "my_variable" with the value 3</li>
+            <li>association made using assignment operator (=)</li>
+            <li>we can name variables <i>almost</i> anything we like</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Printing a variable</h3>
+        <pre class="brush: python">
+my_variable = 3
+print(my_variable)
+        </pre>
+        <ul>
+            <li>pass the variable as input to the print function</li>
+            <li>function inputs are called <i>arguments</i></li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>printing a variable</h3>
+        <pre class="brush: python">
+my_variable = 3
+print("The value of my variable is", my_variable)
+        </pre>
+        <ul>
+            <li>the print function can accept many arguments</li>
+            <li>arguments are separated by commas</li>
+            <li>the variable is appended to the print string</li>
+            <li>note that a space is implicitly added before the variable</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>printing multiple variables</h3>
+        <pre class="brush: python">
+some_variable = 3
+some_other_variable = 4
+
+# all on one line
+print("Some variable is", some_variable, "and the other is", some_other_variable)
+
+# on separate lines
+print("The first variable is", some_variable)
+print("and the second variable is", some_other_variable)
+        </pre>
+        <ul>
+            <li>by default, the print function prints a new line</li>
+            <li>so we can print everything together or on separate lines</li>
+        </ul>
+    </section>
+    
+    <section id="arithmetic-operators">
+        <h3>addition operator</h3>
+        <pre class="brush: python">
+some_variable = 3
+
+# calculate the sum
+sum = some_variable + 5
+
+# all on one line
+print("Sum of", some_variable, "plus 5 is", sum)
+        </pre>
+        <ul>
+            <li>the addition operator allows us to add two values</li>
+            <li>the result of the calculation is returned (3+5)</li>
+            <li>"sum" has a value of 8</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>addition operator</h3>
+        <pre class="brush: python">
+some_variable = 3
+some_other_variable = 4
+
+# calculate the sum
+sum = some_variable + some_other_variable
+
+# all on one line
+print("Sum of", some_variable, "plus", some_other_variable, "is", sum)
+        </pre>
+        <ul>
+            <li>we can add two variables together too</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>subtraction operator</h3>
+        <pre class="brush: python">
+some_variable = 3
+some_other_variable = 4
+
+# calculate the sum
+sum = some_variable - some_other_variable
+
+# all on one line
+print("Sum of", some_variable, "minus", some_other_variable, "is", sum)
+        </pre>
+        <ul>
+            <li>subtraction works the same way</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>addition and subtraction exercise</h3>
+        <div class="exercize_text">Write a program that gives an integer value to a variable, e.g. 10, and prints it out. Then create a new variable by adding 2 to your previously created variable. Print out that variable too. Finally, subtract 5 from your second variable and print out the final variable value. Save as arithmetic.py.</div>
+    </section>
+    
+    <section>
+        <h3>addition and subtraction exercise solution</h3>
+        <pre class="brush: python">
+x = 10
+print(x)
+y = x + 2
+print(y)
+z = y - 5
+print(z)
+        </pre>
+    </section>
+    
+    <section>
+        <h3>multiplication and division</h3>
+        <pre class="brush: python">
+x = 3 * 4 # multiplication
+y = x / 2 # division
+print("multiplication outcome:", x)
+print("division outcome:", y)
+        </pre>
+        <ul>
+            <li>mulpication is performed using an asterisk (*)</li>
+            <li>division is performed using a forward slash (/)</li>
+        </ul>
+    </section>
+    
+    <section id="user-input">
+        <h3>user input</h3>
+        <pre class="brush: python">
+user_input = input("Enter anything and press enter: ")
+print("The user inputted", user_input)
+        </pre>
+        <ul>
+            <li>we can take user input from the console</li>
+            <li><i>input</i> is a function, like <i>print</i></li>
+            <li>the argument passed to the function will be displayed to the user</li>
+            <li>the value entered by the user is assigned to the variable (user_input_var)</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>user input</h3>
+        <pre class="brush: python">
+x = input("Enter an integer: ")
+y = x * 10
+print("input * 10 is", y)
+        </pre>
+        <ul>
+            <li>what will this give us?</li>
+        </ul>
+    </section>
+    
+    <section id="data-types-and-casting">
+        <h3>cast user input</h3>
+        <pre class="brush: python">
+x = input("Enter an integer: ")
+y = int(x)
+z = y * 10
+print("input * 10 is", z)
+        </pre>
+        <ul>
+            <li>cast an input string as a type by calling a function</li>
+            <li>the function name is similar to the data type to which the variable is being cast</li>
+            <li><i>int</i> is a function that casts a variable to an integer</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>some Python data types</h3>
+        <table>
+            <tr><th>type</th><th>description</th></tr>
+            <tr><td style="padding-right: 2em">bool</td><td>boolean true or false</td></tr>
+            <tr><td>int</td><td>integer (whole number)</td></tr>
+            <tr><td>float</td><td>real number (all numbers)</td></tr>
+            <tr><td>string</td><td>a string of alpha-numeric characters</td></tr>
+        </table>
+    </section>
+    
+    <section>
+        <h3>user input</h3>
+        <pre class="brush: python">
+# take input and cast to int on one line
+x = int(input("Enter the first number: "))
+
+y = x + 10
+print("The sum is", y)
+        </pre>
+        <ul>
+            <li>multiple functions can be called on the same line</li>
+            <li>the output of one function is the input of the immediate outer function</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>user input</h3>
+        <pre class="brush: python">
+x = int(input("Enter the first integer: "))
+y = int(input("Enter the second integer: "))
+z = x + y
+print("The sum of", x, "plus", y, "is", z)
+        </pre>
+        <ul>
+            <li>we can call functions multiple times</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>cast user input</h3>
+        <pre class="brush: python">
+# take input and cast it to float on one line
+x = float(input("Enter a real number: "))
+
+y = x + 8
+print("sum is", y)
+        </pre>
+        <ul>
+            <li><i>float</i> is a function that casts a variable to a floating point (real) number</li>
+            
+        </ul>
+    </section>
+    
+    <section>
+        <h3>user input exercise 1</h3>
+        <div class="exercize_text">Write a program that adds a user input integer to a user input float and prints the result. Save as input1.py.</div>
+    </section>
+    
+    <section>
+        <h3>input exercise 1 solution</h3>
+        <pre class="brush: python">
+i = int(input("Enter an integer: "))
+f = float(input("Enter a real number: "))
+print(i, "plus", f, "is", i + f)
+        </pre>
+    </section>
+    
+    <section>
+        <h3>user input exercise 2</h3>
+        <div class="exercize_text">Write a program that takes a number from the user, multiplies it by 5, divides it by 3 and prints the result. Save as input2.py.</div>
+    </section>
+    
+    <section>
+        <h3>input exercise 2 solution</h3>
+        <pre class="brush: python">
+x = int(input("Enter an integer: "))
+y = x * 5
+z = y / 3
+print(x, "multiplied by 5 and divided by 3 is", z)
+        </pre>
+    </section>
+    
+    <section>
+        <h3>booleans</h3>
+        <pre class="brush: python">
+x = True
+y = False
+print("x is", x)
+print("y is", y)
+        </pre>
+        <ul>
+            <li>a boolean can only have a value of True or False</li>
+            <li>True and False must start with capital letters</li>
+            <li>remember, Python is case sensitive</li>
+        </ul>
+    </section>
+    
+    <section id="relational-operators">
+        <h3>relational operators</h3>
+        <ul>
+            <li>a relational operator tests whether a particular relationship is true</li>
+            <li>e.g. 5 > 3 is True but 5 < 3 is False</li>
+            <li>Python has the following relational operators</li>
+        </ul>
+        <table>
+            <tr><th>symbol</th><th>name</th></tr>
+            <tr><td style="padding-right: 4em">&lt</td><td>less than</td></tr>
+            <tr><td>&gt</td><td>greater than</td></tr>
+            <tr><td>&lt=</td><td>less than or equal to</td></tr>
+            <tr><td>&gt=</td><td>greater than or equal to</td></tr>
+            <tr><td>==</td><td>equal to</td></tr>
+            <tr><td>!=</td><td>not equal to</td></tr>
+        </table>
+    </section>
+    
+    <section>
+        <h3>relational operators</h3>
+        <pre class="brush: python">
+x = 2
+y = 3
+z = x > y
+print("z is", z)
+        </pre>
+        <ul>
+            <li>2 is less than 3 so the output should be "False".</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>relational operator exercise</h3>
+        <div class="exercize_text">
+            Write a program that takes an integer from the user and prints True if the input is less than or equal to 6. The printed result should mention the value of the input variable, e.g. It is True that the number 4 is less than or equal to 6. Save as relational1.py.
+        </div>
+    </section>
+    
+    <section>
+        <h3>relational operator exercise solution</h3>
+        <pre class="brush: python">
+x = float(input("Enter a number: "))
+r = x <= 6
+print("It is", r, "that", x, "is less than or equal to 6")
+        </pre>
+    </section>
+    
+    <section id="if-statements">
+        <h3>if statement</h3>
+        <pre class="brush: python">
+if some_condition == True:
+    do_something() # fictional function
+        </pre>
+        <ul>
+            <li>if x then y</li>
+            <li>if conditions are satisfied then executed effects</li>
+            <li>control flow</li>
+        </ul>
+        <img src="./images/if.png" />
+    </section>
+    
+    <section>
+        <h3>if statement</h3>
+        <pre class="brush: python">
+x = 2
+y = 3
+z = x > y
+if z == True:
+    print(x, "is greater than", y)
+        </pre>
+        <ul>
+            <li>what will be printed in above example?</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>if statement</h3>
+        <pre class="brush: python">
+x = 2
+y = 3
+z = x > y
+if z == True:
+    print(x, "is greater than", y)
+        </pre>
+        <ul>
+            <li>the <i>if</i> boolean expression followed by a boolean followed by colon</li>
+            <li>code identation is important</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>if statement</h3>
+        <pre class="brush: python">
+x = 2
+y = 3
+if x > y:
+    print(x, "is greater than", y)
+        </pre>
+        <ul>
+            <li>this is a simplified version of the previous code</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>if statement</h3>
+        <pre class="brush: python">
+if True:
+    print("This will always be executed")
+if False:
+    print("This will never be executed")
+        </pre>
+        <ul>
+            <li>there can be multiple if statements</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>if statement</h3>
+        <pre class="brush: python">
+x = 2
+y = 3
+if x > y:
+    print(x, "is greater than", y)
+    print(x, "is indeed greater than", y)
+print("This is always printed")
+        </pre>
+        <ul>
+            <li>all indented code after if statement depends on if statement</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>if statement</h3>
+        <pre class="brush: python">
+x = 6
+y = 3
+if x > y:
+    print(x, "is greater than", y)
+    print(x, "is indeed greater than", y)
+    at_least_twice_as_much = x >= (y * 2)
+    if at_least_twice_as_much:
+        print(x, "is at least twice as much as", y)
+print("This is always printed")
+        </pre>
+        <ul>
+            <li>any code can be inside if statement</li>
+            <li>dependent code maintains idented vertical alignment</li>
+            <li>even another if statement (ad infinitum)</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>if statement exercise</h3>
+        <div class="exercize_text">Write a grading program that will output "You got an A" if the tested variable is greater than or equal to 90.</div>
+    </section>
+    
+    <section>
+        <h3>if statement exercise solution</h3>
+        <pre class="brush: python">
+grade = float(input("Enter a grade: "))
+if grade >= 90:
+    print("You got an A")
+         </pre>
+    </section>
+    
+    <section>
+        <h3>if .. else</h3>
+        <pre class="brush: python">
+if some_condition == True:
+    do_something()
+else:
+    do_something_else_instead()
+        </pre>
+        <ul>
+            <li>must be part of an if statement</li>
+            <li>will be executed when the if statement condition is not satisfied</li>
+            
+        </ul>
+        <img src="./images/ifelse.png" />
+    </section>
+    
+    <section>
+        <h3>if .. else</h3>
+        <pre class="brush: python">
+x = 2
+y = 3
+if x > y:
+    print(x, "is greater than", y)
+else:
+    print(x, "is not greater than", y)
+        </pre>
+        <ul>
+            <li>same indentation rules as if</li>
+            <li>no boolean required</li>
+            <li><i>else</i> followed by colon</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>if .. else</h3>
+        <pre class="brush: python">
+x = 2
+y = 3
+if x > y:
+    print(x, "is greater than", y)
+else:
+    print(x, "is not greater than", y)
+        </pre>
+        <ul>
+            <li>the else clause will be executed because the if condition is not satisfied</li>
+        </ul>
+    </section>
+    
+    <section id="if-else">
+        <h3>if .. else statement exercise</h3>
+        <div class="exercize_text">Write a grading program that will output "You passed" if the user input a value greater than or equal to 50. Otherwise, output "You failed".</div>
+    </section>
+    
+    <section>
+        <h3>if .. else statement exercise solution</h3>
+        <pre class="brush: python">
+grade = int(input("Enter grade: "))
+if grade >= 50:
+    print("You passed")
+else:
+    print("You failed")
+        </pre>
+    </section>
+    
+    <section>
+        <h3>else if (elif)</h3>
+        <pre class="brush: python">
+if some_condition == True:
+    do_something()
+elif some_other_condition1 == True:
+    do_some_other_thing1()
+elif some_other_condition2 == True:
+    do_some_other_thing2()
+else:
+    do_something_else_instead()
+        </pre>
+        <ul>
+            <li><i>elif</i> is short for <i>else if</i></li>
+            <li>must be part of an if statement</li>
+            <li>there can be any number of <i>elif</i> clauses</li>
+            <li>like a set of if statements where only the top-most satisfied one is executed</li>
+            <li>used to keep code tidy</li>
+            <li><i>else</i> isn't required after an <i>elif</i></li>
+        </ul>
+    </section>
+    
+    <section id="else-if">
+        <h3>else if (elif)</h3>
+        <pre class="brush: python">
+x = 2
+y = 3
+if x > y:
+    print(x, "is greater than", y)
+elif x < y:
+    print(x, "is less than", y)
+else:
+    print(x, "is equal to", y)
+        </pre>
+        <ul>
+            <li><i>elif</i> is short for <i>else if</i></li>
+            <li>must be part of an if statement</li>
+            <li>like a set of if statements where only the top-most satisfied one is executed</li>
+            <li>used to keep code tidy</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>if statement exercise</h3>
+        <div class="exercize_text">Write a grading program that will output an appropriate grade for each of the following situations:</div>
+        <table>
+            <tr><th>output</th><th>condition</th></tr>
+            <tr><td style="padding-right: 2em">You got an A</td><td>grade greater than or equal to 90</td></tr>
+            <tr><td>You got an B</td><td>grade from 80 to 89</td></tr>
+            <tr><td>You got an C</td><td>grade from 70 to 79</td></tr>
+            <tr><td>You got an D</td><td>grade from 60 to 69</td></tr>
+            <tr><td>You got an F</td><td>grade less than 60</td></tr>
+        </table>
+        <br />
+        <p>Don't use boolean operators (covered later)</p>
+    </section>
+    
+    <section id="else-if">
+        <h3>else if (elif)</h3>
+        <pre class="brush: python">
+grade = int(input("Enter grade: "))
+if grade >= 90:
+    print("You got an A")
+elif grade >= 80:
+    print("You got an B")
+elif grade >= 70:
+    print("You got an C")
+elif grade >= 60:
+    print("You got an D")
+else:
+    print("You got an F")
+        </pre>
+    </section>
+    
+    <section id="boolean-operators">
+        <h3>boolean operators</h3>
+        <ul>
+            <li>operations with boolean inputs that give a boolean output</li>
+            <li>e.g. True and False, False or True, not True</li>
+            <li>Python has the following boolean operators</li>
+        </ul>
+        <table>
+            <tr><th style="padding-right: 2em">name</th><th style="padding-right: 2em">operation</th><th style="padding-right: 2em">description</th></tr>
+            <tr><td>not</td><td>negation</td><td>flip the input</td></tr>
+            <tr><td>and</td><td>conjunction</td><td>are both inputs True?</td></tr>
+            <tr><td>or</td><td>disjunction</td><td>is at least one input True?</td></tr>
+        </table>
+    </section>
+    
+    <section>
+        <h3>not boolean operator</h3>
+        <pre class="brush: python">
+x = 2
+y = 3
+p = x > y
+if p:
+    print(x, "is greater than", y)
+if not p:
+    print(x, "is not greater than", y)
+        </pre>
+        <ul>
+            <li>if the input is true, the output is false</li>
+            <li>if the input is false, the output is true</li>
+        </ul>
+        <br /><br /><br />
+        <table>
+            <tr><th style="padding-right: 4em">p</th><th style="padding-right: 2em">not p</th></tr>
+            <tr><td>False</td><td>True</td></tr>
+            <tr><td>True</td><td>False</td></tr>
+        </table>
+    </section>
+    
+    <section>
+        <h3>and boolean operator</h3>
+        <pre class="brush: python">
+grade = int(input("Enter grade: "))
+if grade >= 50 and grade <= 100:
+    print("You passed")
+elif grade >= 0 and grade < 50:
+    print("You failed")
+else:
+    print("You entered an invalid grade")
+</pre>
+        <ul>
+            <li>both inputs must be True to return True</li>
+            <li>all other situations return False</li>
+        </ul>
+        <table>
+            <tr><th style="padding-right: 4em">p</th><th style="padding-right: 4em">q</th><th style="padding-right: 2em">p and q</th></tr>
+            <tr><td>False</td><td>False</td><td>False</td></tr>
+            <tr><td>False</td><td>True</td><td>False</td></tr>
+            <tr><td>True</td><td>False</td><td>False</td></tr>
+            <tr><td>True</td><td>True</td><td>True</td></tr>
+        </table>
+    </section>
+        
+    <section>
+        <h3>or boolean operator</h3>
+        <pre class="brush: python">
+heavy_rain = True
+icy = False
+if heavy_rain and icy:
+    print("Stay inside")
+else:
+    print("Go out to play")
+        </pre>
+        <ul>
+            <li>at least one input must be True to return True</li>
+            <li>returns False if both inputs are False</li>
+        </ul>
+        <table>
+            <tr><th style="padding-right: 4em">p</th><th style="padding-right: 4em">q</th><th style="padding-right: 2em">p or q</th></tr>
+            <tr><td>False</td><td>False</td><td>False</td></tr>
+            <tr><td>False</td><td>True</td><td>True</td></tr>
+            <tr><td>True</td><td>False</td><td>True</td></tr>
+            <tr><td>True</td><td>True</td><td>True</td></tr>
+        </table>
+    </section>
+    
+    <section>
+        <h3>truth table exercise</h3>
+        <div class="exercize_text">Create a truth table showing logical possibilities for a set of propositions, p, q, not p, not q, p or q, not p or q, p or not q, not p or not q.</div>
+    </section>
+
+    <section id="mod-operator">
+        <h3>Modulus (mod) operator</h3>
+        <blockquote>
+            The operator that returns the remainder after integer division of its first argument by its second
+            <cite>The Free Online Dictionary of Computing</cite>
+        </blockquote>
+        <ul>
+            <li>the remainder from division of the first argument by the second</li>
+            <li>sometimes called <i>clock arithmetic</i></li>
+            <li>values wrap around like on a clock</li>
+            <li>mod operators is a %</li>
+            <li>25 % 10 == 5</li>
+            <li>8 % 2 == 0</li>
+            <li>23 % 12 == 11</li>
+            <li>53 % 2 == 1</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Modulus (mod) operator</h3>
+        <figure>
+            <img src="./images/mod_10.png" />
+            <figcaption>mod 10 (source: http://www-math.ucdenver.edu/~wcherowi)</figcaption>
+        </figure>
+        <figure>
+            <img src="./images/mod_12.png" />
+            <figcaption>mod 12 (source: eimacs.com)</figcaption>
+        </figure>
+    </section>    
+    
+    <section>
+        <h3>Modulus (mod) operator example</h3>
+        <pre class="brush: python">
+x = 12
+my_mod = 3
+mod_result = x % my_mod
+print(x, "mod", my_mod, "is", mod_result)
+        </pre>
+        <ul>
+            <li>what will be the value of mod_result?</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Modulus (mod) operator exercise 1</h3>
+        <div class="exercize_text">Write a program that asks for an integer from the user and outputs whether or not the given integer is divisible by 5 without having a remainder.</div>
+    </section>
+    
+    <section>
+        <h3>Modulus (mod) operator exercise solution</h3>
+        <pre class="brush: python">
+x = int(input("Enter a number: "))
+if x % 5 == 0:
+    print(x, "is evenly divisible by 5")
+else:
+    print(x, "is not evenly divisible by 5")
+        </pre>
+    </section>
+    
+    <section>
+        <h3>Modulus (mod) operator exercise 2</h3>
+        <div class="exercize_text">Write a program that asks for an integer from the user and outputs whether or not the given integer is odd or even.</div>
+    </section>
+    
+    <section>
+        <h3>Modulus (mod) operator exercise solution</h3>
+        <pre class="brush: python">
+x = int(input("Enter a number: "))
+if x % 2 == 0:
+    print(x, "is an even number")
+else:
+    print(x, "is an odd number")
+        </pre>
+    </section>
+
+    <section>
+        <h3>Changing a variable value</h3>
+        <pre class="brush: python">
+x = 0
+print("x starts at", x)
+x = x + 5 # old value plus some value assigned to x
+print("x after x = x + 5 is", x)
+x += 6 # shorter method
+print("x after x += 6 is", x)
+x -= 3 # works for other operators
+print("x after x -= 3 is", x)
+x /= 2
+print("x after x /= 2 is", x)
+x *= 4
+print("x after x *= 4 is", x)
+        </pre>
+        <ul>
+            <li><i>x</i> on the right hand side of <i>=</i> will hold the current value</li>
+            <li>the right side is evaluated first</li>
+            <li>the result is assigned to <i>x</i></li>
+            <li>x = x + 2 is the same as x += 2</li>
+            <li>prefer the shorter and more readable version</li>
+        </ul>
+    </section>
+    
+    <section id="while-loop">
+        <h3>While loop</h3>
+        <ul>
+            <li>an if statement that will keep executing until the boolean condition is no longer satisfied</li>
+            <li>useful for executing a code block multiple times in succession</li>
+        </ul>
+        <img src="./images/while.png" />    
+    </section>
+    
+    <section>
+        <h3>Stages of while loop loop</h3>
+        <pre class="brush: python">
+while guard_condition:
+	execute_while_guard_is_true()
+#some code after the while loop
+        </pre>
+        <ol>
+            <li>guard condition evaluated</li>
+            <li>if guard condition is true, goto step 3, otherwise, goto step 5</li>
+            <li>execute code inside the while loop</li>
+            <li>goto step 2</li>
+            <li>execute whatever code comes after loop</li>
+        </ol>
+    </section>
+    
+    <section>
+        <h3>Stages of while loop</h3>
+        <ol>
+            <li>initialize values of variables</li>
+            <li>place guard on loop</li>
+            <li>develop body of loop - do work we want</li>
+            <li>progress toward termination</li>
+        </ol>
+    </section>
+    
+    <section>
+        <h3>While loop</h3>
+        <pre class="brush: python">
+i = 0 # initialize values of variables
+while i < 5: # place guard on loop
+    print("i is", i ) # develop body of loop
+    i += 1 # progress toward termination
+        </pre>
+        <ul>
+            <li>same style as if statement</li>
+            <li>keyword, boolean expression, colon, identation</li>
+            <li>what will be the output?</li>
+            <li>beware of infinite loops</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>While loop exercise 1</h3>
+        <div class="exercize_text">
+            Write a program that prints the multiples of 5 from 0 to 100. e.g. 0, 5, 10, 15, ..., 100.
+        </div>
+    </section>
+    
+    <section>
+        <h3>While loop exercise 1 solution</h3>
+        <pre class="brush: python">
+multiple = 0
+while multiple <= 100:
+    print(multiple)
+    multiple += 5
+        </pre>
+    </section>
+    
+    <section>
+        <h3>While loop exercise 2</h3>
+        <div class="exercize_text">
+            Write a program that prints the even numbers from 0 to 10.
+        </div>
+    </section>
+    
+    <section>
+        <h3>While loop exercise 2 solution</h3>
+        <pre class="brush: python">
+i = 2
+while i <= 10:
+    print(i)
+    i += 2
+        </pre>
+        
+        <pre class="brush: python">
+i = 0
+while i <= 10:
+    if i % 2 == 0:
+        print(i)
+    i += 1
+        </pre>
+    </section>
+    
+    <section>
+        <h3>While loop exercise 3</h3>
+        <div class="exercize_text">
+            Write a program that takes exactly 3 numeric inputs from the user and outputs their sum.
+        </div>
+    </section>
+    
+    <section>
+        <h3>While loop exercise 3 solution</h3>
+        <pre class="brush: python">
+num_inputs_taken = 0
+sum = 0
+while num_inputs_taken < 3:
+    user_number = float(input("Enter a number: "))
+    num_inputs_taken += 1
+    sum += user_number
+print("The sum is", sum)
+        </pre>
+    </section>
+    
+    <section>
+        <h3>While loop exercise 4</h3>
+        <div class="exercize_text">
+            Write a program that keeps taking numbers from the user until the sum of those numbers is greater than 20. Output the final sum.
+        </div>
+    </section>
+    
+    <section>
+        <h3>While loop exercise 4 solution</h3>
+        <pre class="brush: python">
+sum = 0
+while sum <= 20:
+    user_number = float(input("Enter a number: "))
+    sum += user_number
+print("The sum is", sum)
+        </pre>
+    </section>
+    
+    <section>
+        <h3>Sentinel value</h3>
+        <pre class="brush: python">
+sentinel = -1
+sum = 0
+user_input = None # tell interpreter this is empty
+while user_input != sentinel:
+    u = input("Enter a positive number or -1 to quit: ")
+    user_input = float(u)
+    sum += user_input
+sum += 1 # add back the -1 that added to the sum
+print("The sum of the numbers entered is", sum)
+        </pre>
+        <ol>
+            <li>a sentinel is a special value used to guarantee the possible termination of a loop</li>
+            <li>it is useful when the number of inputs isn’t known in advance</li>
+            <li>not as useful in Python as in older languages</li>
+            <li>e.g. keep presenting user with menu until they select quit</li>
+            <li>e.g. continue adding numbers until the sentinel value is entered</li>
+        </ol>
+    </section>
+    
+    <section>
+        <h3>Sentinel value</h3>
+        <pre class="brush: python">
+sentinel = "exit"
+sum = 0
+user_input = None # tell interpreter this is empty
+while True: # loop forever
+    u = input("Enter a positive number or 'exit' to exit: ")
+    if u == sentinel:
+        break # break out of loop
+    user_input = float(u)
+    sum += user_input
+print("The sum of the numbers entered is", sum)
+        </pre>
+        <ol>
+            <li>a sentinel being implemented via the <i>break</i> keyword</li>
+            <li>executing break exits the immediate loop in which it is executed</li>
+        </ol>
+    </section>
+    
+    <section>
+        <h3>While loop exercise 5</h3>
+        <div class="exercize_text">Write a program that take numbers from the user until they enter "exit". After this, print the average of the numbers they entered. The formula for calculating the average is: average = sum of inputs / number of inputs</div>
+    </section>
+	
+	<section>
+        <h3>While loop exercise 5 solution</h3>
+        <pre class="brush: python">
+sum = 0
+sentinel = "exit"
+user_string = None
+num_numeric_inputs = 0
+while True:
+    user_string = input("Enter a number: ")
+    if user_string == sentinel:
+        break
+    user_number = float(user_string)
+    sum += user_number
+    num_numeric_inputs += 1
+average = sum / num_numeric_inputs
+print("The average is", average)
+        </pre>
+    </section>
+    
+    <section>
+        <h3>While loop exercise 6</h3>
+        <div class="exercize_text">The user must guess the secret number of your choosing. Ask the user to input a number from 1 to 10 as their guess. If they guessed incorrectly, tell them they are wrong. If they guessed correctly, tell them they are right and end the loop.</div>
+    </section>
+	
+	<section>
+        <h3>While loop exercise 6 solution</h3>
+        <pre class="brush: python">
+secret_number = 6
+guess = int(input("Guess the secret number from 1 to 10: "))
+while guess != secret_number:
+    guess = int(input("Wrong! Guess again: "))
+print("You guessed the secret number")
+        </pre>
+    </section>
+    
+    <section>
+        <h3>Top-down development</h3>
+        <ul>
+            <li>starts with an overview concept of a system</li>
+            <li>concept is continually decomposed in less abstract, more refined concepts</li>
+            <li>refinement and decomposition continues the concept no longer needs refinement</li>
+            <li>in computer programming, this point is usually the level of a single function</li>
+            <li>promotes modular development and helps designer to consider system constraints sooner</li>
+        </ul>
+    </section>
+    
+    <section id="development-and-data-validation">
+        <h3>Top-down development example</h3>
+            development environment e.g. Notepad++
+            <ul>
+                <li>settings</li>
+                <li>plugin system</li>
+                <li>bookmark manager</li>
+                <li>...</li>
+                <li>user interface</li>
+                <ul>
+                    <li>project explorer</li>
+                    <li>build output</li>
+                    <li>...</li>
+                    <li>text editor</li>
+                    <ul>
+                        <li>syntax highlighter</li>
+                        <li>...</li>
+                    </ul>
+                </ul>
+            </ul>
+    </section>
+    
+    <section>
+        <h3>Data validation</h3>
+        <ul>
+            <li>simple - check that input is between 1 and 12 when specifying month</li>
+            <li>complex - check that an email address contains at least one letter before the @ and at least another before the dot and at least one letter after that</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Data validation exercise</h3>
+        <div class="exercize_text">
+			Write a program that asks a user for their age until they give a valid age. Inform the user that their input is invalid if input is less than 4 or greater than 120. Otherwise, inform the user they are too young if under 18 and welcome them for any other age.
+		</div>
+    </section>
+	
+	<section>
+        <h3>Data validation exercise solution</h3>
+        <pre class="brush: python">
+while True:
+    age = int(input("Please enter your age: "))
+    if age < 4 or age > 120:
+        print("Ages must be from 4 to 120.")
+    elif age < 18:
+        print("Anyone under 18 is too young.")
+    else:
+        print("Welcome.")
+        break
+        </pre>
+    </section>
+    
+    <section id="for-loops">
+        <h3>For loop</h3>
+        <pre class="brush: python">
+for temp_variable in some_collection:
+	do_something()
+#some code after the for loop
+        </pre>
+        <ol>
+            <li>temporary variable assigned value of first element in list</li>
+            <li>if the element doesn't exist, goto step 3, else goto step 6</li>
+            <li>execute code inside for</li>
+            <li>loop variable set to next element in list</li>
+            <li>goto step 3</li>
+            <li>terminate loop</li>
+        </ol>
+    </section>
+    
+    <section>
+        <h3>Lists (briefly)</h3>
+        <pre class="brush: python">
+x = [3, "apples", "cats", 4.91, "apples"]
+print(x) # [3, 'apples', 'cats', 4.91, 'apples']
+        </pre>
+        <ol>
+            <li>a collection of objects of any type</li>
+            <li>can be of any length, including empty</li>
+            <li>can contain duplicates</li>
+            <li>contained within square brackets</li>
+            <li>elements are separated by commas</li>
+        </ol>
+    </section>
+    
+    <section>
+        <h3>For loop</h3>
+        <pre class="brush: python">
+some_collection = [3, "apples", "cats", 4.91, "apples"]
+for element in some_collection:
+	print(element)
+        </pre>
+        <ul>
+            <li>for each element in the list, print it</li>
+        </ul>
+        
+    </section>
+    
+    <section>
+        <h3>For loop</h3>
+        <pre class="brush: python">
+ages = [13, 24, 12, 8, 31, 34]
+for age in ages:
+    if age < 18:
+        print(age, "is less than 18")
+        </pre>
+        <ul>
+            <li>only print the numbers in the list that are more than 18</li>
+        </ul>
+        
+    </section>
+    
+    <section>
+        <h3>Why use for loops</h3>
+        <ul>
+            <li>for loops are preferred to while loops because</li>
+            <li>they make it harder to accidentally create an infinite loop</li>
+            <li>many compilers have nice optimisations for them</li>
+            <li>for loops are particularly useful for arrays (later)</li>
+            <li>use for loops when it is known how many iterations should occur</li>
+            <li>use while loops when it isn’t known how many loops will occur or when you intend to create an infinite loop</li>
+        </ul>    
+    </section>
+    
+    <section>
+        <h3>range function</h3>
+        <pre class="brush: python">
+range(0, 10, 3) # [0, 3, 6, 9]
+range(5, 10) # [5, 6, 7, 8, 9] (step of 1 is implicit)
+range(3) # [0, 1, 2] (start at 0 is implicit)
+range(-10, -100, -30) # [-10, -40, -70]
+        </pre>
+        <ul>
+            <li>returns a list of numbers from start to stop by step</li>
+            <li>starts at the first argument, goes up to, but does not include second</li>
+            <li>very useful for iteration (repeatedly performing something)</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>range function</h3>
+        <pre class="brush: python">
+range(0, 10, 3) # [0, 3, 6, 9]
+range(5, 10) # [5, 6, 7, 8, 9] (step of 1 is implicit)
+range(3) # [0, 1, 2] (start at 0 is implicit)
+range(-10, -100, -30) # [-10, -40, -70]
+        </pre>
+        <ul>
+            <li>first argument is always the first element in the list - mandatory</li>
+            <li>second argument is never included in the list - optional</li>
+            <li>third argument is the step size - optional</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>For loop</h3>
+        <pre class="brush: python">
+for i in range(0, 10, 2):
+    print(i)
+        </pre>
+        <ul>
+            <li>print every number from 0 to 8 in increments of 2</li>
+            <li><i>i</i> is traditionally the iterable variable name</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>For loop</h3>
+        <pre class="brush: python">
+for i in range(10, 0, -1):
+    print(i)
+        </pre>
+        <ul>
+            <li>print every number from 10 to 1 in increments of -1</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>For loop exercise 1</h3>
+        <div class="exercize_text">Write a program that uses a for loop to output the sum of the numbers from 1 to 10.</div>
+    </section>
+    
+    <section>
+        <h3>For loop exercise 1 solution</h3>
+        <pre class="brush: python">
+sum = 0
+for i in range(1, 11, 1):
+    sum += i
+print("Sum is", sum)
+        </pre>
+    </section>
+    
+    <section>
+        <h3>For loop exercise 2</h3>
+        <div class="exercize_text">
+            Use a for loop to take five integers from a user. Display the running and final sum of these integers.
+        </div>
+    </section>
+    
+    <section>
+        <h3>For loop exercise 2 solution</h3>
+        <pre class="brush: python">
+sum = 0
+for i in range(1, 6, 1):
+    sum += i
+    print("Running sum is", sum)
+print("Final sum is", sum)
+        </pre>
+    </section>
+    
+    <section>
+        <h3>For loop exercise 3</h3>
+        <div class="exercize_text">
+            Take an integer from a user. Using a for loop, tell the user which numbers from 2 to 10 that the integer can evenly be divided by.
+        </div>
+    </section>
+    
+    <section>
+        <h3>For loop exercise 3 solution</h3>
+        <pre class="brush: python">
+u = int(input("Enter an integer: "))
+for i in range(2, 11, 1):
+    if (u % i == 0):
+        print(u, "can be evenly divided by", i)
+        </pre>
+    </section>
+    
+    <section>
+        <h3>For loop exercise 4</h3>
+        <div class="exercize_text">
+            Write a program that asks the user to input the starting value, the ending value and the step value of a range. Output the average of the values in that user specified range.
+        </div>
+    </section>
+    
+    <section>
+        <h3>For loop exercise 4 solution</h3>
+        <pre class="brush: python">
+sum = 0
+num_elements = 0
+start = int(input("Enter a starting value: "))
+end = int(input("Enter a ending value: "))
+step = int(input("Enter a step size: "))
+for i in range(start, end, step):
+    num_elements += 1
+    sum += i
+print("Average is", sum / num_elements)
+        </pre>
+    </section>
+
+    <section id="syntax-and-semantics">
+        <h3>Syntax</h3>
+        <blockquote>
+            <i>Syntax</i> is the way symbols may be combined to create well-formed sentences (or programs) in the language. Syntax defines the formal relationships between the constituents in a language [...]. Syntax deals solely with the form and structure of a language without consideration given to their meaning.
+            <cite>Kevin Slonnger, Syntax and Semantics of Programming Languages</cite>
+        </blockquote>
+    </section>
+    
+    <section>
+        <h3>Syntax</h3>
+        <ul>
+            <li>in English, it is legal for a pronoun to be followed by a verb, e.g. I am</li>
+            <li>in English, it is not legal for a pronoun to be followed by an adjective e.g. I big</li>
+            <li>in Python it is legal for a variable to be followed by an operator e.g. x =</li>
+            <li>in Python it is not legal for the <i>while</i> keyword to be followed by the <i>if</i> keyword e.g. while if</li>
+            <li>every programming language has a syntax that must be adhered to for a program made usig the language to run</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Semantics</h3>
+        <blockquote>
+            <i>Semantics</i> reveal the meaning of syntactically valid strings in a language. [...] Semantics describe the behaviour that a computer follows when executing a program.
+            <cite>Kevin Slonnger, Syntax and Semantics of Programming Languages</cite>
+        </blockquote>
+    </section>
+    
+    <section>
+        <h3>Syntax and semantics</h3>
+        <pre class="brush: python">
+# Print numbers from 0 to 9 in Python
+for i in range(0, 10, 1):
+    print(i)
+        </pre>
+        <pre class="brush: python">
+// Print numbers from 0 to 9 in C
+for (int i = 0; i < 10; i++) {
+    printf("%d", i);
+}
+        </pre>
+        <ul>
+            <li>both code snippets have the same meaning as they both tell the computer to do the same thing</li>
+            <li>the semantics of if, while and for constructs are the same across all programming languages</li>
+            <li>each language differs in the interface to the computer through different language syntax</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Miscellaneous definitions</h3>
+        <ul>
+            <li>clear screen - when a screen a emptied of much of its content</li>
+            <li>reverse video - the effect that causes highlighted text to invert the background and text colour</li>
+        </ul>
+    </section>
+    
+    <section id="more-exercises">
+        <h3>If you've finished everything</h3>
+        <ul>
+            <li><a href="http://projecteuler.net/problems">number-based problems for computing</a></li>
+            <li><a href="http://rosalind.info/problems/list-view/">string-based problems for computing</a></li>
+        </ul>
+    </section>
+</div> <!-- slides -->
+</div> <!-- reveal.js -->
+
+		<script src="../reveal/lib/js/head.min.js"></script>
+		<script src="../reveal/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../reveal/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../reveal/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../reveal/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

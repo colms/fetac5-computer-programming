@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<title>Computer Programming</title>
+
+		<meta name="description" content="Computer Programming in Python">
+		<meta name="author" content="Colm Sloan">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<link rel="stylesheet" href="../reveal/css/reveal.css">
+		<link rel="stylesheet" href="../reveal/css/theme/default.css" id="theme">
+        <link rel="stylesheet" href="../reveal/css/killester.css">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../reveal/lib/css/zenburn.css">
+		<link rel="stylesheet" href="../reveal/lib/css/print/pdf.css">
+		
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="..reveal/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+        
+        <script type="text/javascript" src="../syntaxhighlighter_3.0.83/scripts/shCore.js"></script>
+        <script type="text/javascript" src="../syntaxhighlighter_3.0.83/scripts/shBrushPython.js"></script>
+        <link type="text/css" rel="stylesheet" href="../syntaxhighlighter_3.0.83/styles/shCoreDefault.css"/>
+        <script type="text/javascript">SyntaxHighlighter.all();</script>
+
+		<!--[if lt IE 9]>
+		<script src="../reveal/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+<div class="reveal">
+<div class="slides">
+
+    <section>
+        <h1>Computer Programming in Python</h1>
+        <p><small>by Colm Sloan</small></p>
+    </section>
+    
+    <section id="table-of-contents">
+        <h3>Table of contents</h3>
+        <ol>
+            <li><a href="#/character-sets">Character sets</a></li>
+            <li><a href="#/ascii">US ASCII</a></li>
+            <li><a href="#/control-characters">Control characters</a></li>
+            <li><a href="#/eascii">Extended ASCII</a></li>
+            <li><a href="#/strings">Strings</a></li>
+            <li><a href="#/advanced-accessing">Advanced iterable access</a></li>
+            <li><a href="#/io">File input/output</a></li>
+            <li><a href="#/more-exercises">More exercises</a></li>
+        </ol>
+    </section>
+    
+    <section id="character-sets">
+        <h3>Character set</h3>
+        <ul>
+            <li>an encoding that maps byte long sequences of bits to symbols, including letters, numbers, punctuation and more.</li>
+            <li>life before a standard set</li>
+        </ul>
+    </section>
+    
+    <section id="ascii">
+        <h3>US ASCII</h3>
+        <ul>
+            <li>American Standard Code for Information Interchange</li>
+            <li>A standard character set for representing characters from the English alphabet</li>
+            <li>128 characters</li>
+            <li>1 byte – 7 bits for character – 1 for parity</li>            
+        </ul>
+    </section>
+    
+    <section>
+        <h3>US ASCII</h3>
+        <img src="./images/ascii.png" />
+    </section>
+    
+    <section>
+        <h3>US ASCII</h3>
+        <ul>
+            <li>ordinal set</li>
+            <li>a set with a kind of order structure applied to it</li>
+            <li>the set of months in a year</li>
+            <li>the set of values in the ASCII table is an ordinal set because each is associated with a character</li>
+            <li>32 unprintable characters followed by 96 printable characters</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>US ASCII</h3>
+        <pre class="brush: python">
+for index in range(0, 128, 1):
+    print(chr(index))
+        </pre>
+    </section>
+    
+    <section id="control-characters">
+        <h3>Control characters</h3>
+        <ul>
+            <li>Control characters are characters reserved for special behaviour</li>
+            <li>Python has mapped certain control characters to elements in the US-ASCII table</li>
+            <li>put a control character inside a printed string to activate it</li>
+            <div style="padding: 1em; margin-left: auto; margin-right: auto;">
+                <table>
+                    <tr><th>character</th><th>effect</th></tr>
+                    <tr><td>\n</td><td>line feed</td></tr>
+                    <tr><td>\t</td><td>tab</td></tr>
+                    <tr><td>\a</td><td>beep</td></tr>
+                </table>
+            </div>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Control characters</h3>
+        <pre class="brush: python">
+print("line\nfeed.") # new line
+print("Black and \twhite") # tab
+print("\a") # beep
+        </pre>
+    </section>
+    
+    <section id="eascii">
+        <h3>Extended ASCII</h3>
+        <ul>
+            <li>ASCII later unofficially extended to non-English characters as a superset</li>
+            <li>used for glyphs such as áéíóú£</li>
+            <li>used the last parity bit to create 128 more characters</li>
+            <li>many different standards</li>
+            <li>ISO Latin-1</li>
+            <li>Not used so much in Python</li>
+            <li>Unicode (UTF-8) is the default for Python 3</li>
+        </ul>
+    </section>
+    
+    <section id="strings">
+        <h3>What is a string?</h3>
+        <blockquote>
+            A sequence of data values, usually bytes, which usually stand for characters (a ‘character string’). The mapping between values and characters is determined by the character set which is itself specified implicitly or explicitly by the environment in which the string is being interpreted.
+            <cite>Free On-Line Dictionary Of Computing</cite>
+        </blockquote>
+    </section>
+    
+    <section>
+        <h3>Strings</h3>
+        <pre class="brush: python">
+greeting = "hello"
+
+print(greeting) # hello
+
+print(greeting[0]) # h
+print(greeting[1]) # e
+print(greeting[2]) # l
+print(greeting[3]) # l
+print(greeting[4]) # o
+
+# print whole word one letter at a time
+for letter in greeting:
+    print(letter)
+        </pre>
+        <ul>
+            <li>characters within a string can be accessed using indices</li>
+            <li>strings are iterable</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>String</h3>
+        <pre class="brush: python">
+greeting = "hello"
+print(greeting + " there") # 'hello there'
+print(greeting * 2) # 'hellohello'
+print(greeting == "hello") # True
+print(greeting != "hello") # False
+        </pre>
+        <ul>
+            <li>string operators are mostly intuitive</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>String terminology</h3>
+        <pre class="brush: python">
+greeting = "hello"
+l = len(greeting)
+print("Length of", greeting, "is", l)
+        </pre>
+        <ul>
+            <li>length</li>
+            <ul>
+                <li>the number of characters in a string</li>
+            </ul>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>String terminology</h3>
+        <pre class="brush: python">
+import sys
+greeting = "hello"
+size = sys.getsizeof(greeting)
+print("Size of", greeting, "is", size)
+        </pre>
+        <ul>
+            <li>size</li>
+            <ul>
+                <li>the amount of memory used by a string</li>
+            </ul>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>String terminology</h3>
+        <ul>
+            <li>dimension</li>
+            <ul>
+                <li>the number of indices needed to access a character in the array (we only deal with one dimension)</li>
+            </ul>
+        </ul>
+        <ul>
+            <li>immutable</li>
+            <ul>
+                <li>cannot be modified</li>
+            </ul>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Strings</h3>
+        <pre class="brush: python">
+greeting = "hello"
+greeting[0] = 'f' # 'str' object does not support item assignment
+        </pre>
+        <ul>
+            <li>strings are of type 'str' under the hood</li>
+            <li>strings in Python are immutable - they cannot be modified</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Strings</h3>
+        <pre class="brush: python">
+greeting = "hello"
+greeting += " there"
+print(greeting) # 'hello there'
+        </pre>
+        <ul>
+            <li>the string in memory is immutable but the variable is not</li>
+        </ul>
+    </section>
+    
+    <section id="advanced-accessing">
+        <h3>Accessing list elements - Advanced</h3>
+        <pre class="brush: python">
+animals = ["ape", "bison", "crocodile", "dog", "elephant"]
+print(animals[0:2]) # ['ape', 'bison']
+print(animals[1:4]) # ['bison', 'crocodile', 'dog']
+print(animals[2:2]) # []
+        </pre>
+        <ul>
+            <li>a subset or 'slice' of a list can be accessed using the slicing notation</li>
+            <li>slice = my_list[start_index:end_index]</li>
+            <li>slice includes the elements from the start index up to but not including the end index</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Accessing list elements - Advanced</h3>
+        <pre class="brush: python">
+animals = ["ape", "bison", "crocodile", "dog", "elephant"]
+print(animals[0:-1]) # ['ape', 'bison', 'crocodile', 'dog']
+print(animals[1:-2]) # ['bison', 'crocodile']
+        </pre>
+        <ul>
+            <li>a negative index specifies the distance from the last element in a list</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Accessing list elements - Advanced</h3>
+        <pre class="brush: python">
+animals = ["ape", "bison", "crocodile", "dog", "elephant"]
+print(animals[2:]) # ['crocodile', 'dog', 'elephant']
+print(animals[:2]) # ['ape', 'bison']
+print(animals[:-1]) # ['ape', 'bison', 'crocodile', 'dog']
+print(animals[-1:]) # ['elephant']
+print(animals[:]) # ['ape', 'bison', 'crocodile', 'dog', 'elephant']
+        </pre>
+        <ul>
+            <li>an unspecified index means every element</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Accessing list elements - Advanced</h3>
+        <pre class="brush: python">
+greeting = "hello"
+print(greeting[2:]) # 'llo'
+print(greeting[:2]) # 'he'
+print(greeting[:-1]) # 'hell'
+print(greeting[-1:]) # 'o'
+print(greeting[:]) # 'hello'
+        </pre>
+        <ul>
+            <li>slicing will also work with strings because strings are also iterable</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>String exercise 1</h3>
+        <div class="exercize_text">
+            Generate a string with the value "zappy" from a string with the value "happy" through the use of string relational operators and slicing.
+        </div>
+    </section>
+    
+    <section>
+        <h3>String exercise 1 solution</h3>
+         <pre class="brush: python">
+s = "happy"
+s = "z" + s[1:]
+print(s)
+        </pre>
+    </section>
+    
+    <section>
+        <h3>String exercise 2</h3>
+        <div class="exercize_text">
+            Write a program to count the how many times the letter ‘s’ occurs in the word “Mississippi”. Have the program count the letters using two different techniques: one that you have implemented yourself and another using standard library functions.
+        </div>
+    </section>
+    
+    <section>
+        <h3>String exercise 2 solution</h3>
+         <pre class="brush: python">
+word = "Mississippi"
+s_counter = 0
+for letter in word:
+    if letter == 's':
+        s_counter += 1
+print("The number of times the letter s occurs in Mississippi is", s_counter)
+
+# The standard library way
+print(word.count('s'))
+        </pre>
+    </section>
+            
+    <section>
+        <h3>String exercise 3</h3>
+        <div class="exercize_text">
+            Write a program to count the number of differences between the strings "10001011" and "11001010".
+        </div>
+    </section>
+    
+    <section>
+        <h3>String exercise 3 solution</h3>
+         <pre class="brush: python">
+a = "10001101"
+b = "11001010"
+differences = 0
+for index in range(0,7):
+    if a[index] == b[index]:
+        differences += 1
+print("There are", differences, "differences between", a, "and", b)
+        </pre>
+    </section>
+    
+    <section>
+        <h3>String exercise 4</h3>
+        <div class="exercize_text">
+            Write a program to replace all occurrences of the 'i' with 'a' in the word “Mississippi”. Do this using two different techniques: one that you have implemented yourself and another using standard library functions.
+        </div>
+    </section>
+    
+    <section>
+        <h3>String exercise 4 solution</h3>
+         <pre class="brush: python">
+word = "Mississippi"
+new_word = ""
+for letter in word:
+    if letter == 'i':
+        new_word += 'a'
+    else:
+        new_word += letter
+print("new_word is", new_word)
+
+# The standard library way
+print(word.replace('i', 'a'))
+        </pre>
+    </section>
+    
+    <section>
+        <h3>String exercise 5</h3>
+        <div class="exercize_text">
+            Generate a random string of 8 characters and output whether the string contains the letter 'e'.
+        </div>
+    </section>
+    
+    <section>
+        <h3>String exercise 5 solution</h3>
+         <pre class="brush: python">
+import random
+random_word = ""
+for i in range(0, 8):
+    rand_int = random.randint(97, 123)
+    random_word += chr(rand_int)
+print(random_word)
+if 'e' in random_word:
+    print("e is in", random_word)
+else:
+    print("e is not in", random_word)
+        </pre>
+    </section>
+    
+    <section id="io">
+        <h3>File Input / Output</h3>
+        <ul>
+            <li>read from and write to files</li>
+            <li>use the "open" function</li>
+            <li>first argument is file name</li>
+            <li>second argument is a letter indicating what we are opening the file for</li>
+            <li>read from existing files - "r"</li>
+            <li>create new files - "w"</li>
+            <li>append to existing files - "a"</li>
+            <li>both read from and wrote to file - "r+"</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Reading from a file</h3>
+        <ul>
+            <li>if the file being read is in the same directory as the python for being executed, we only need to specify the name of the for and not the location</li>
+            <li>paste the animals.txt file into the same directory as the executed python file for the duration of these </li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Reading from a file</h3>
+         <pre class="brush: python">
+# create handle to input file
+# r indicates that we are reading
+input_file = open("animals.txt", "r")
+
+# run through the file and print it line by line
+for line in input_file:
+    print(line)
+
+input_file.close()
+input_file = open("animals.txt", "r")
+
+# read the entire file at once as a string
+file_string = input_file.read()
+
+# and remove the newline
+# at the end of each line in the file
+lines = file_string.splitlines()
+print(lines)
+
+input_file.close()
+        </pre>
+    </section>
+    
+    <section>
+        <h3>Writing to a file</h3>
+        <ul>
+            <li>if no file exists, one will be created</li>
+            <li>if a file exists, it will be completely overwritten</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Writing to a file</h3>
+         <pre class="brush: python">
+# create handle to output file
+# w indicates that we are writing
+output_file = open("test.txt", "w")
+output_file.write("hello\n") # method 1
+print("other method",  file=output_file) # method 2
+output_file.close()
+        </pre>
+    </section>
+    
+    <section>
+        <h3>Appending to a file</h3>
+         <pre class="brush: python">
+# create handle to output file
+# a indicates that we are appending
+output_file = open("test.txt", "a")
+output_file.write("another\n") # method 1
+print("few lines", file=output_file) # method 2
+output_file.close()
+        </pre>
+    </section>
+    
+    <section>
+        <h3> File I/O exercise 1</h3>
+        <div class="exercize_text">
+            Write that spell checker program that tells the user if the animal name they have entered is spelled correctly. The spell checker simply searches for a word in a text file and informs the user of a misspelling if the word the user emerged is not in the text file.
+        </div>
+    </section>
+    
+    <section>
+        <h3>File I/O exercise 1 solution</h3>
+         <pre class="brush: python">
+input_file = open("animals.txt", "r")
+file_string = input_file.read()
+lines = file_string.splitlines()
+user_input = input("Enter the animal name you would like to spell check: ")
+if user_input in lines:
+    print(user_input, "is spelled correctly")
+else:
+    print(user_input, "is spelled incorrectly")
+        </pre>
+    </section>
+    
+    <section id="more-exercises">
+        <h3>If you've finished everything</h3>
+        <ul>
+            <li><a href="http://projecteuler.net/problems">number-based problems for computing</a></li>
+            <li><a href="http://rosalind.info/problems/list-view/">string-based problems for computing</a></li>
+        </ul>
+    </section>
+</div> <!-- slides -->
+</div> <!-- reveal.js -->
+
+		<script src="../reveal/lib/js/head.min.js"></script>
+		<script src="../reveal/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../reveal/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../reveal/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../reveal/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

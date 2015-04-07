@@ -1,0 +1,1316 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<title>Computer Programming</title>
+
+		<meta name="description" content="Computer Programming in Python">
+		<meta name="author" content="Colm Sloan">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<link rel="stylesheet" href="../reveal/css/reveal.css">
+		<link rel="stylesheet" href="../reveal/css/theme/default.css" id="theme">
+        <link rel="stylesheet" href="../reveal/css/killester.css">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../reveal/lib/css/zenburn.css">
+		<link rel="stylesheet" href="../reveal/lib/css/print/pdf.css">
+		
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="..reveal/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+        
+        <script type="text/javascript" src="../syntaxhighlighter_3.0.83/scripts/shCore.js"></script>
+        <script type="text/javascript" src="../syntaxhighlighter_3.0.83/scripts/shBrushPython.js"></script>
+        <link type="text/css" rel="stylesheet" href="../syntaxhighlighter_3.0.83/styles/shCoreDefault.css"/>
+        <script type="text/javascript">SyntaxHighlighter.all();</script>
+
+		<!--[if lt IE 9]>
+		<script src="../reveal/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+<div class="reveal">
+<div class="slides">
+
+    <section>
+        <h1>Computer Programming in Python</h1>
+        <p><small>by Colm Sloan</small></p>
+    </section>
+    
+    <section id="table-of-contents">
+        <h3>Table of contents</h3>
+        <ol>
+            <li><a href="#/dictionaries">Dictionaries</a></li>
+            <li><a href="#/comprehensions">Comprehensions</a></li>
+            <li><a href="#/regex">Regular Expressions</a></li>
+            <li><a href="#/classes">Classes</a></li>
+            <li><a href="#/ui">User Interface</a></li>
+            <li><a href="#/more-exercises">More exercises</a></li>
+        </ol>
+    </section>
+    
+    <section id="dictionaries">
+        <h3>Dictionary</h3>
+        <pre class="brush: python">
+# populate dictionary
+name_to_employee_no = {'John': 58, 'Mary' : 93, 'Steve' : 4}
+
+print(name_to_employee_no)
+print("John's employee number is", name_to_employee_no['John'])
+        </pre>
+        <ul>
+            <li>dictionaries are a map of one value to another</li>
+            <li>surrounded by curly braces</li>
+            <li>key and values separated by colon</li>
+            <li>entries separated by commas</li>
+            <li>a value can be accessed using the corresponding key</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Dictionary</h3>
+        <pre class="brush: python">
+# start with empty dictionary
+mobile_number_to_profile = {}
+
+# populate dictionary
+mobile_number_to_profile[1234567] = "acme.biz/john.html"
+mobile_number_to_profile[2468135] = "acme.biz/mary.html"
+
+#query dictionary
+phone_no = int(input("Please enter your mobile number: "))
+if phone_no in mobile_number_to_profile:
+    print("Loading profile:", mobile_number_to_profile[phone_no])
+else:
+    print("Phone number is not associated with a profile")
+    print("Setting up with temporary profile")
+    mobile_number_to_profile[phone_no] = "acme.biz/temp.html"
+print(mobile_number_to_profile)
+        </pre>
+        <ul>
+            <li>can map from strings and numbers to any type</li>
+            <li>can query if there is an entry for a key</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Dictionary exercise 1</h3>
+        <div class="exercize_text">
+             Create a dictionary to count how many times each letter occurs in animal.txt.
+        </div>
+    </section>
+    
+    <section>
+        <h3>Dictionary exercise 2</h3>
+        <div class="exercize_text">
+             Create a dictionary to count how many times each word occurs in the text of Huckleberry Finn (http://www.gutenberg.org/cache/epub/76/pg76.txt).
+        </div>
+    </section>
+    
+    <section id="comprehensions">
+        <h3>List comprehension</h3>
+        <pre class="brush: python">
+# squares without list comprehension
+squares = []
+for i in range(1, 11, 1):
+    squares.append(i * i)
+print(squares)
+        </pre>
+        <pre class="brush: python">
+# squares with list comprehension
+squares = [x * x for x in range(1, 11, 1)]
+print(squares)
+        </pre>
+        <ul>
+            <li>list comprehensions are a concise notation for creating lists</li>
+            <li>enclosed in square brackets</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>List comprehension</h3>
+        <pre class="brush: python">
+even = [x for x in range(1, 20, 1) if x % 2 == 0]
+print(even)
+        </pre>
+        <ol>
+            <li>specify the return value e.g. <i>x</i></li>
+            <li>generate value to be returned using for loop</li>
+            <li>filter using condition e.g. <i>if x % 2 == 0</i></li>
+        </ol>
+    </section>
+    
+    <section>
+        <h3>List comprehension</h3>
+        <pre class="brush: python">
+def long_enough(word):
+    return len(word) > 3
+
+words = ["Once", "upon", "a", "time"]
+
+# create list of lists from words
+# in the format ["WORD", 4]
+x = [[w.upper(), len(w)] for w in words if long_enough(w)]
+print(x)
+        </pre>
+        <ul>
+            <li>can be used with functions</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>List comprehension</h3>
+        <pre class="brush: python">
+# example from http://www.secnetix.de/olli/Python/list_comprehensions.hawk
+
+noprimes = [j for i in range(2, 8) for j in range(i * 2, 50, i)]
+primes = [x for x in range(2, 50) if x not in noprimes]
+print(primes)
+        </pre>
+        <ul>
+            <li>although concise, they can sometimes be difficult to understand</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>List comprehension exercise 1</h3>
+        <div class="exercize_text">
+             Use a list comprehension to generate the list of words from animals.txt longer than 3 letters and containing the letter 'o'.
+        </div>
+    </section>
+    
+    <section>
+        <h3>List comprehension exercise 1 solution</h3>
+         <pre class="brush: python">
+file = open("animals.txt", "r")
+animals = file.read().splitlines()
+print(animals)
+some_animals = [a for a in animals if len(a) > 3 and 'o' in a]
+print(some_animals)
+        </pre>
+    </section>
+    
+    <section id="regex">
+        <h3>Regular expression</h3>
+        <blockquote>
+            A sequence of symbols and characters expressing a string or pattern to be searched for within a longer piece of text.
+            <cite>Wikipedia</cite>
+        </blockquote>
+    </section>
+    
+    <section>
+        <h3>Regular expression</h3>
+        <pre class="brush: python">
+import re
+
+# find all matches for the word "he"
+file = open("computer_programming_in_python_unit_1.html", "r")
+html = file.read()
+file.close()
+matches = re.findall(r"he", html)
+print("num matches:", len(matches))
+print("matches:", matches)
+        </pre>
+        <ul>
+            <li>use the standard regular expression library, <i>re</i></li>
+            <li>having <i>r</i> before a string makes it a raw string</li>
+            <li>raw strings are read as is, i.e. "\n" are two separate characters, not a new line</li>
+            <li><i>re.findall</i> accepts a regular expression (regex) and a string to search</li>
+            <li><i>re.findall</i> returns a list of all matches for the regex in the string</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Regular expression</h3>
+        <pre class="brush: python">
+matches = re.findall(r"he", html)
+        </pre>
+        <pre code>
+<u>he</u>
+t<u>he</u>
+t<u>he</u>n
+        </pre>
+        <ul>
+            <li>matches underlined</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Regular expression</h3>
+        <pre class="brush: python">
+matches = re.findall(r"2", html)
+        </pre>
+        <pre code>
+<u>2</u>
+3<u>2</u>
+5<u>2</u>4<u>2</u>
+        </pre>
+        <ul>
+            <li>numbers can be searched just like letters</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Regular expression</h3>
+        <pre class="brush: python">
+matches = re.findall(r".he", html)
+        </pre>
+        <pre code>
+he
+<u>the</u>
+style<u>she</u>et
+        </pre>
+        <ul>
+            <li>the period symbol . (wild card) matches every character</li>
+            <li>to match only an actual  period, use \.</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Regular expression</h3>
+        <pre class="brush: python">
+matches = re.findall(r"[cw]he", html)
+        </pre>
+        <pre code>
+she
+<u>whe</u>ther
+un<u>che</u>ck
+        </pre>
+        <ul>
+            <li>square brackets limit matches to only characters inside them</li>
+            <li>notice that <i>t</i> is not inside so there are no matches for "the"</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Regular expression</h3>
+        <pre class="brush: python">
+matches = re.findall(r"[^tT]he", html)
+        </pre>
+        <pre code>
+<u>she</u>
+their
+<u>whe</u>ther
+un<u>che</u>ck
+heather
+        </pre>
+        <ul>
+            <li>the hat symbol, ^, means "not" in regular expressions</li>
+            <li>regular expressions are case sensitive (by default)</li>
+            <li>find all three letter matches not starting with "t" and followed by "he"</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Regular expression</h3>
+        <pre class="brush: python">
+matches = re.findall(r"r[m-z]t", html)
+        </pre>
+        <pre code>
+unde<u>rst</u>and
+operator
+eve<u>ryt</u>hing
+write
+t<u>rut</u>h
+        </pre>
+        <ul>
+            <li>the hyphen symbol, -, indicates a range</li>
+            <li>regular expressions are case sensitive (by default)</li>
+            <li>find all three letter matches starting with "r", where the next letter is between "m" and "z" (lower case), and followed by a "t"</li>
+            <li>can also be used for numbers e.g. r"h[0-3]", html</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Regular expression exercise 1</h3>
+        <div class="exercize_text">
+             Find all opening HTML elements containing exactly one letter in the unit 1 HTML. e.g. &lt;p&gt;
+        </div>
+    </section>
+    
+    <section>
+        <h3>Regular expression exercise 1 solution</h3>
+         <pre class="brush: python">
+matches = re.findall(r"<[a-zA-Z]>", html)
+        </pre>
+    </section>
+    
+    <section>
+        <h3>Regular expression exercise 2</h3>
+        <div class="exercize_text">
+             Find all closing HTML elements containing exactly two letters. e.g. &lt;/ol&gt; and &lt;/ul&gt;
+        </div>
+    </section>
+    
+    <section>
+        <h3>Regular expression exercise 2 solution</h3>
+         <pre class="brush: python">
+matches = re.findall(r"</[a-zA-Z][a-zA-Z]>", html)
+        </pre>
+    </section>
+    
+    <section>
+        <h3>Regular expression</h3>
+        <pre class="brush: python">
+matches = re.findall(r"t[a-zA-Z]+", html)
+        </pre>
+        <pre code>
+syn<u>tax</u>
+insert1000
+i<u>terable</u>
+cert9b
+considera<u>tion</u>
+        </pre>
+        <ul>
+            <li>the plus symbol, +, represents finding at least one match and to continue matching until the search text no longer fits the regular expression</li>
+            <li>one of the greedy search operators</li>
+            <li>one or more</li>
+            <li>find all text that starts with "t" and ends when it finds something not in the alphabet</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Regular expression</h3>
+        <pre class="brush: python">
+matches = re.findall(r"[a-zA-Z]+he[a-zA-Z]+", html)
+        </pre>
+        <pre code>
+<u>adhere</u>
+heat
+<u>finished</u>
+the
+<u>theme</u>
+        </pre>
+        <ul>
+            <li>remember that you can have multiple clauses</li>
+            <li>find all words containing "he" where the word must have at least one letter before and after "he"</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Regular expression exercise 3</h3>
+        <div class="exercize_text">
+             Find all opening HTML elements that only contain letters.
+        </div>
+    </section>
+    
+    <section>
+        <h3>Regular expression exercise 3 solution</h3>
+         <pre class="brush: python">
+matches = re.findall(r"<[a-zA-Z]+>", html)
+        </pre>
+    </section>
+    
+    <section>
+        <h3>Regular expression exercise 4</h3>
+        <div class="exercize_text">
+             Find the names of all png files mentioned in the HTML e.g. apps.png. Remember to run your regex in Notepad++ for comparison and bear in mind that some file names contain underscores.
+        </div>
+    </section>
+        
+    <section>
+        <h3>Regular expression exercise 4 solution</h3>
+         <pre class="brush: python">
+# because all images are preceeded by "/images/"
+matches = re.findall(r"[^/]+\.png", html)
+        </pre>
+    </section>
+    
+    <section>
+        <h3>Regular expression</h3>
+        <pre class="brush: python">
+matches = re.findall(r"[a-zA-Z]*he[a-zA-Z]+", html)
+        </pre>
+        <pre code>
+<u>adhere</u>
+<u>heat</u>
+<u>finished</u>
+the
+<u>theme</u>
+        </pre>
+        <ul>
+            <li>asterisk, *, represents finding at least one match and to continue matching until the search text no longer fits the regular expression</li>
+            <li>the other greedy search operator</li>
+            <li>zero or more</li>
+            <li>find all words containing "he" where the word may or may not have letters before "he" but must have at least one letter after "he"</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Regular expression</h3>
+        <pre class="brush: python">
+matches = re.findall(r"&lt;cite&gt;(.*)&lt;/cite&gt;", html)
+        </pre>
+        <pre code>
+&lt;cite&gt;<u>Wordnet, Princeton</u>&lt;/cite&gt;
+&lt;cite&gt;<u>Oxford Dictionary</u>&lt;/cite&gt;
+        </pre>
+        <ul>
+            <li>capture groups, (), allow users to return only the parts of matches that interest them</li>
+            <li>find all text with the cite tag</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Regular expression exercise 4</h3>
+        <div class="exercize_text">
+             Find the names of all div classes used in unit 1.
+        </div>
+    </section>
+    
+    <section>
+        <h3>Regular expression</h3>
+        <ul>
+            <li>there are several regular expression shortcut characters</li>
+            <li>\w equals [a-zA-Z0-9_], all alphanumeric characters</li>
+            <li>\W equals [^a-zA-Z0-9_], all non-alphanumeric characters</li>
+            <li>\d equals [0-9], all numeric characters</li>
+            <li>\D equals [^0-9], all non-numeric characters</li>
+            <li>\s equals [\t\r\n\f], all whitespace characters</li>
+            <li>\S equals [^\t\r\n\f], all non-whitespace characters</li>
+        </ul>
+    </section>
+        
+    <section id="classes">
+        <h3>Class</h3>
+        <blockquote>
+            A <i>class</i> is a grouping of operations and data that the operations use. A class defines each operation, known as a method and acts as a blue print from which objects can be created.
+        </blockquote>
+    </section>
+        
+    <section>
+        <h3>Object</h3>
+        <blockquote>
+            An object in object-oriented programming (OOP) is an instance of a class. An object is the finished product of following the blue print. The object has its own copy of the data defined in the class and can perform all operations specified from the class.
+        </blockquote>
+    </section>
+        
+    <section>
+        <h3>Classes</h3>
+        <ul>
+            <li>let's imagine we're making a 2D game</li>
+        </ul>
+    </section>
+        
+    <section>
+        <h3>Classes</h3>
+        <pre class="brush: python">
+class Vector2(object):
+    _x = None
+    _y = None
+    
+    def __init__(self, x, y):
+        self._x = x
+        self._y = y
+    
+    def __repr__(self):
+        return "(" + str(self._x) + "," + str(self._y) + ")"
+
+vec = Vector2(5, 8)
+print("vec is", vec) # (5, 8)
+        </pre>
+        <ul>
+            <li><i>class</i> keyword followed by class name encolsing inherited class</li>
+            <li>class data (instance variables), <i>_x</i> and <i>_y</i>, defined before methods</li>
+            <li>special <i>__init__</i> method for initializing object</li>
+        </ul>
+    </section>
+        
+    <section>
+        <h3>Classes</h3>
+        <pre class="brush: python">
+class Vector2(object):
+    _x = None
+    _y = None
+    
+    def __init__(self, x, y):
+        self._x = x
+        self._y = y
+    
+    def __repr__(self):
+        return "(" + str(self._x) + "," + str(self._y) + ")"
+        
+vec = Vector2(5, 8)
+print("vec is", vec) # (5, 8)
+        </pre>
+        <ul>
+            <li><i>vec</i> is an instance of Vector2</li>
+            <li><i>vec</i> is initialized with the values 5 and 8</li>
+            <li>public methods can be called on vec</li>
+            <li><i>self</i> refers to the particular object</li>
+            <li><i>__repr__</i> is special method for object representation</li>
+            <li>follow the style guide</li>
+        </ul>
+    </section>
+        
+    <section>
+        <h3>Class methods and objects</h3>
+        <pre class="brush: python">
+class Vector2(object):
+    
+    # stuff we already previously defined
+        
+    def translate(self, x, y):
+        self._x += x
+        self._y += y
+        
+vec1 = Vector2(5, 8)
+vec2 = Vector2(1, 0)
+print("vec1 is", vec1) # (5, 8)
+print("vec2 is", vec2) # (1, 0)
+vec1.translate(1, -1)
+print("vec1 is", vec1) # (6, 7)
+print("vec2 is", vec2) # (1, 0)
+        </pre>
+        <ul>
+            <li><i>vec</i> is an instance of Vector2</li>
+            <li><i>vec</i> is initialized with the values 5 and 8</li>
+            <li>public methods can be called on vec</li>
+        </ul>
+    </section>
+        
+    <section>
+        <h3>Modularize</h3>
+        <pre class="brush: python">
+from vector2 import *
+
+vec1 = Vector2(5, 8)
+vec2 = Vector2(1, 0)
+print("vec1 is", vec1) # (5, 8)
+print("vec2 is", vec2) # (1, 0)
+vec1.translate(1, -1)
+print("vec1 is", vec1) # (6, 7)
+print("vec2 is", vec2) # (1, 0)
+        </pre>
+        <ul>
+            <li>makes vector2 it's own module by placing it in a file vector2.py</li>
+            <li>import the vector2 module and use it to make it works</li>
+        </ul>
+    </section>
+        
+    <section>
+        <h3>Monster</h3>
+        <pre class="brush: python">
+from vector2 import *
+        
+class Monster(object):
+    _pos = None
+    _health = None
+    _name = None
+    
+    def __init__(self, name):
+        self._pos = Vector2(0, 0)
+        self._health = 100
+        self._name = name
+        
+    def __repr__(self):
+        return "name: " + self._name + ", health: " + str(self._health) + ", position: " + str(self._pos)
+     
+    def move(self, direction):
+        if (direction == "up"): self._pos.translate(0, 1)
+        if (direction == "down"): self._pos.translate(0, -1)
+        if (direction == "left"): self._pos.translate(-1, 0)
+        if (direction == "right"): self._pos.translate(1, 0)
+        </pre>
+    </section>
+        
+    <section>
+        <h3>Monster</h3>
+        <pre class="brush: python">
+from vector2 import *
+        
+class Monster(object):
+    _pos = None
+    # ...
+    def __init__(self, type):
+        self._pos = Vector2(0, 0)
+    # ...
+    def __repr__(self):
+        return "name: " + self._name + ", health: " + str(self._health) + ", position: " + str(self._pos)
+</pre>
+        <ul>
+            <li>classes can be composed from existing classes</li>
+            <li>methods can be called on Vector2 object as before</li>
+            <li>move this into monster.py</li>
+        </ul>
+    </section>
+        
+    <section>
+        <h3>Monster</h3>
+        <pre class="brush: python">
+from monster import *
+
+m = Monster("ogre")
+print(m)
+m.move("down")
+print(m)
+        </pre>
+        <ul>
+            <li>a small demonstration of the class working</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Class exercise 1</h3>
+        <div class="exercize_text">
+             Create hero.py with a Hero class for killing monsters. The hero should have a position, a name, health and strength. Implement the initialization and repr methods. The initialization method should have self, name and strength as parameters.
+        </div>
+    </section>
+
+    <section>
+        <h3>Class exercise 1 solution</h3>
+        <pre class="brush: python">
+from vector2 import *
+        
+class Hero(object):
+    _pos = None
+    _health = None
+    _name = None
+    _strength = None
+    
+    def __init__(self, name):
+        self._pos = Vector2(0, 0)
+        self._health = 100
+        self._name = name
+        self._strength = strength
+        
+    def __repr__(self):
+        return "name: " + self._name + ", health: " + str(self._health) + ", position: " + str(self._pos) + ", strength: " + str(self._strength)
+     
+    def move(self, direction):
+        if (direction == "up"): self._pos.translate(0, 1)
+        if (direction == "down"): self._pos.translate(0, -1)
+        if (direction == "left"): self._pos.translate(-1, 0)
+        if (direction == "right"): self._pos.translate(1, 0)
+        </pre>
+    </section>
+    
+    <section>
+        <h3>Don't Repeat Yourself (DRY)</h3>
+        <ul>
+            <li>there is a lot of the same code in the Monster and Hero class</li>
+            <li>it's bad to have duplicated code</li>
+            <li>eliminate duplication with composition or inheritance</li>
+            <li>prefer composition to inheritance</li>
+        </ul>
+    </section>
+        
+    <section id="refactor">
+        <h3>Refactor</h3>
+        <blockquote>
+            Code refactoring is the process of restructuring existing computer code – changing the factoring – without changing its external behavior.
+            <cite>Wikipedia</cite>
+        </blockquote>
+    </section>
+        
+    <section>
+        <h3>Refactor</h3>
+        <ul>
+            <li>let's refactor our code so the move demostration code we used earlier still works but so there's less duplication in our code</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Class exercise 2</h3>
+        <div class="exercize_text">
+             Create a Position class containg a Vector2 and the <i>move</i> method that operates on the Vector2. Have the Position constructor take an x and y value to be given to the Vector2. 
+        </div>
+    </section>
+        
+    <section>
+        <h3>Class exercise 2 solution</h3>
+        <pre class="brush: python">
+from vector2 import *
+
+class Position(object):
+    _vec2 = None
+    
+    def __init__(self, x, y):
+        self._vec2 = Vector2(x, y)
+        
+    def __repr__(self):
+        return "position: " + str(self._vec2)
+    
+    def move(self, direction):
+        if (direction == "up"): self._vec2.translate(0, 1)
+        if (direction == "down"): self._vec2.translate(0, -1)
+        if (direction == "left"): self._vec2.translate(-1, 0)
+        if (direction == "right"): self._vec2.translate(1, 0)
+        </pre>
+    </section>
+        
+    <section>
+        <h3>Class exercise 3</h3>
+        <div class="exercize_text">
+             Make the <i>_pos</i> variable in Monster and Hero of type Position instead of Vector2 and modify the <i>move</i> method in Monster and Hero to call the Position move method.
+        </div>
+    </section>
+    
+    <section>
+        <h3>Class exercise 3 solution</h3>
+        <pre class="brush: python">
+from position import *
+        
+class Monster(object):
+    _pos = None
+    _health = None
+    _name = None
+    
+    def __init__(self, name):
+        self._pos = Position(0, 0)
+        self._health = 100
+        self._name = name
+        
+    def __repr__(self):
+        return "type: " + self._name + ", health: " + str(self._health) + ", position: " + str(self._pos)
+     
+    def move(self, direction):
+        self._pos.move(direction)
+        </pre>
+    </section>
+        
+    <section>
+        <h3>Class exercise 3 solution</h3>
+        <pre class="brush: python">
+from position import *
+        
+class Hero(object):
+    _pos = None
+    _health = None
+    _name = None
+    _strength = None
+    
+    def __init__(self, name):
+        self._pos = Position(0, 0)
+        self._health = 100
+        self._name = name
+        self._strength = strength
+        
+    def __repr__(self):
+        return "name: " + self._name + ", health: " + str(self._health) + ", position: " + str(self._pos) + ", strength: " + str(self._strength)
+     
+    def move(self, direction):
+        self._pos.move(direction)
+        </pre>
+    </section>
+        
+    <section>
+        <h3>Class exercise 4</h3>
+        <div class="exercize_text">
+             Add speed, strength and defense to the Monster class. Add speed and defense to the Hero class. Make it so a Monster and Hero move by their speed value. Modify the Position <i>move</i> method to accept a speed argument. Also have Monster accept strength in its constructor just as Hero does. The following code should run when done:
+        </div>
+        <pre class="brush: python">
+from monster import *
+from hero import *
+
+m = Monster("ogre", 10)
+print(m)
+m.move("down")
+print(m)
+h = Hero("Olaf", 10)
+print(h)
+h.move("right")
+print(h)
+        </pre>
+    </section>
+    
+    <section>
+        <h3>Class exercise 4 solution</h3>
+        <pre class="brush: python">
+from vector2 import *
+
+class Position(object):
+    # ...
+    def move(self, direction, speed):
+        if (direction == "up"): self._vec2.translate(0, speed)
+        if (direction == "down"): self._vec2.translate(0, -speed)
+        if (direction == "left"): self._vec2.translate(-speed, 0)
+        if (direction == "right"): self._vec2.translate(speed, 0)
+        </pre>
+    </section>
+        
+    <section>
+        <h3>Class exercise 4 solution</h3>
+        <pre class="brush: python">
+from position import *
+        
+class Monster(object):
+    _pos = None
+    _name = None
+    _health = None
+    _speed = None
+    _defense = None
+    _strength = None
+    
+    # ...
+     
+    def move(self, direction):
+        self._pos.move(direction, self._speed)
+        </pre>
+    </section>
+        
+    <section>
+        <h3>Class exercise 5</h3>
+        <div class="exercize_text">
+             Modify Monster and Hero so when one attacks the other, the defender losing an amount of health equal to strength of the attacker minus the defense of the defender. Implement a <i>take_damage</i> method the following signature: <i>def take_damage(self, attack_strength)</i>. <i>take_damage</i> should be called from inside <i>attack</i>. This code should run afterward:
+        </div>
+        <pre class="brush: python">
+from monster import *
+from hero import *
+        
+ogre = Monster("ogre", 10)
+print(ogre)
+hero = Hero("Olaf", 10)
+print(hero)
+hero.attack(ogre)
+print(ogre)
+        </pre>
+    </section>
+        
+    <section>
+        <h3>Class exercise 5 solution</h3>
+        <pre class="brush: python">
+class Monster(object):
+    # ...
+     
+    def take_damage(self, attack_strength):
+        self._health -= attack_strength - self._defense
+    
+    def attack(self, target):
+        target.take_damage(self._strength)
+        </pre>
+    </section>
+        
+    <section>
+        <h3>Class exercise 6</h3>
+        <div class="exercize_text">
+             Add a <i>_battle_cry</i> procedure that is called within the <i>attack</i> method for Hero and Monster. Have the procedure print, "For king and country!" when called by the Hero and, "*growl*" when called by the Monster.
+        </div>
+    </section>
+        
+    <section>
+        <h3>Class exercise 6 solution</h3>
+        <pre class="brush: python">
+class Monster(object):
+    # ...
+    
+    def attack(self, target):
+        battle_cry()
+        target.take_damage(self._strength)
+
+    def _battle_cry(self):
+        print("*growl*")
+        </pre>
+        
+        <pre class="brush: python">
+class Hero(object):
+    # ...
+    
+    def attack(self, target):
+        battle_cry()
+        target.take_damage(self._strength)
+
+    def _battle_cry(self):
+        print("For King and country!")
+        </pre>
+    </section>
+        
+    <section>
+        <h3>More refactoring</h3>
+        <ul>
+            <li>There's a lot of duplication between Monster and Hero. They're always doing the same things and it's a pain to update both each time. Let's put what they have in common into one class. We can use further composition but instead, we'll use inheritance.</li>
+        </ul>
+    </section>
+
+    <section id="inheritance">
+        <h3>Inheritance</h3>
+        <blockquote>
+            In object-oriented programming, inheritance is the concept that when a class of objects is defined, any subclass that is defined can inherit the definitions of one or more general classes.
+            <cite>Margaret Rouse</cite>
+        </blockquote>
+        <ul>
+            <li>composition used for "has-a" relationship, e.g. Monster "has-a" position</li>
+            <li>inheritance used for "is-a" relationship, e.g. Monster "is-a" combat character</li>
+            <li>inheritance is a very powerful tool</li>
+            <li>prefer composition to inheritance</li>
+        </ul>
+    </section>
+        
+    <section>
+        <h3>Inheritance</h3>
+        <pre class="brush: python">
+from position import *
+        
+class CombatCharacter(object):
+    _pos = None
+    _name = None
+    _health = None
+    _speed = None
+    _defense = None
+    _strength = None
+    
+    def __init__(self, name, strength):
+        self._pos = Position(0, 0)
+        self._health = 100
+        self._name = name
+        self._speed = 5
+        self._strength = strength
+        
+    def __repr__(self):
+        return "name: " + self._name + ", health: " + str(self._health) + ", position: " + str(self._pos)
+     
+    def move(self, direction):
+        self._pos.move(direction, self._speed)
+
+    def take_damage(self, attack_strength):
+        self._health -= attack_strength - self._defense
+
+    def attack(self, target):
+        self._battle_cry()
+        target.take_damage(self._strength)
+        </pre>
+        <ul>
+            <li>all common code was put into new CombatCharacter class</li>
+        </ul>
+    </section>
+        
+    <section>
+        <h3>Inheritance</h3>
+        <pre class="brush: python">
+from combat_character import *
+        
+class Monster(CombatCharacter):
+    
+    def __repr__(self):
+        return "Monster: {" + super().__repr__() + "}"
+    
+    def _battle_cry(self):
+        print("*growl*")
+        </pre>
+        
+        <pre class="brush: python">
+from combat_character import *
+
+class Hero(CombatCharacter):
+    
+    def __repr__(self):
+        return "Hero: {" + super().__repr__() + "}"
+    
+    def _battle_cry(self):
+        print("For King and country!")
+        </pre>
+        <ul>
+            <li>inherits from CombatCharacter</li>
+            <li><i>super()</i> calls from the class it was inherited from</li>            
+        </ul>
+    </section>
+        
+    <section id="ui">
+        <h3>User Interface</h3>
+        <ul>
+            <li>graphical user interface (GUI) makes it easier for layman to interact</li>
+            <li>several Python GUI libraries exist</li>
+            <li>we'll use PyQt5</li>
+            <li>tutorials here: http://zetcode.com/gui/pyqt4/</li>
+        </ul>
+    </section>
+        
+    <section>
+        <h3>Empty window</h3>
+        <img src="images/empty.png" />
+    </section>
+    
+    <section>
+        <h3>Empty window</h3>
+        <pre class="brush: python">
+import sys
+from PyQt5.QtCore import *
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
+
+def main():
+  app = QApplication(sys.argv)
+
+  window = QMainWindow()
+  window.resize(600, 480)
+  window.move(0, 0)
+  window.setWindowTitle('PyQt5')
+  window.show()
+  
+  exit_code = app.exec_()
+  sys.exit(exit_code)
+
+if __name__ == '__main__':
+    main()        
+        </pre>
+    </section>
+    
+    <section>
+        <h3>Empty window</h3>
+        <pre class="brush: python">
+  app = QApplication(sys.argv)
+
+  window = QMainWindow()
+  window.resize(600, 480)
+  window.move(0, 0)
+  window.setWindowTitle('PyQt5')
+  window.show()
+  
+  exit_code = app.exec_()
+  sys.exit(exit_code)
+        </pre>
+        <ul>
+            <li>app must be created before widget</li>
+            <li>window created and properties specified</li>
+            <li>loop until the user quits or program crashes</li>
+            <li>error code indicates normal app exit or error</li>
+        </ul>
+    </section>
+        
+    <section>
+        <h3>Converter GUI</h3>
+        <img src="images/converter.png" />
+    </section>
+        
+    <section>
+        <h3>Converter GUI</h3>
+        <pre class="brush: python">
+import sys
+from PyQt5.QtCore import *
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
+
+class ConverterWidget(QWidget):
+  _inchesLabel = None
+  _inchesLine = None
+  _inchesToCmButton = None
+  _cmLabel = None
+  _cmResultLabel = None
+  
+  def __init__(self, parent = None):
+    super().__init__(parent)
+    self.setup_widgets()
+    self.setup_layout()
+    self.setWindowTitle("Converter")
+    
+  def setup_widgets(self):
+    self._inchesLabel = QLabel("inches:")
+    self._inchesLine = QLineEdit()
+    self._inchesToCmButton = QPushButton("Convert")
+    self._cmLabel = QLabel("centimeters:")
+    self._cmResultLabel = QLabel("")
+    self._inchesToCmButton.clicked.connect(self.inches_to_cms)
+        </pre>
+    </section>
+        
+    <section>
+        <h3>Converter GUI</h3>
+        <pre class="brush: python">
+  def setup_layout(self):
+    main_layout = QGridLayout()
+    # addWidget(widget, row, column, rowspan = 1, colspan = 1)
+    main_layout.addWidget(self._inchesLabel, 0, 1)
+    main_layout.addWidget(self._inchesLine, 0, 2)
+    main_layout.addWidget(self._inchesToCmButton, 0, 3)
+    main_layout.addWidget(self._cmLabel, 1, 1)
+    main_layout.addWidget(self._cmResultLabel, 1, 2)
+    self.setLayout(main_layout)
+   
+  def inches_to_cms(self):
+    inches = float(self._inchesLine.text())
+    cm = inches * 2.54
+    self._cmResultLabel.setText(str(cm))
+
+def main():
+  app = QApplication(sys.argv)
+  window = ConverterWidget()
+  window.show()
+  exit_code = app.exec_()
+  sys.exit(exit_code)
+
+if __name__ == '__main__':
+    main()
+        </pre>
+    </section>
+        
+    <section>
+        <h3>GUI exercise 1</h3>
+        <div class="exercize_text">
+             Extend the widget to include the ability to convert centimeters to inches.
+        </div>
+    </section>
+        
+    <section>
+        <h3>GUI exercise 2</h3>
+        <div class="exercize_text">
+             Create a calculator app.
+        </div>
+    </section>
+        
+    <section>
+        <h3>Dropdown and Radio</h3>
+        <img src="images/radio.png" />
+    </section>
+        
+    <section>
+        <h3>Dropdown and Radio</h3>
+        <pre class="brush: python">
+import sys
+from PyQt5.QtCore import *
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
+
+class SomeWidget(QWidget):
+  _country_dropdown = None
+  _male_radio = None
+  _female_radio = None
+  
+  def __init__(self, parent = None):
+    super().__init__(parent)
+    self.setup_widgets()
+    self.setup_layout()
+    self.setWindowTitle("Some widgets")
+    
+  def setup_widgets(self):
+    self._country_dropdown = QComboBox()
+    self._country_dropdown.addItem("Ireland")
+    self._country_dropdown.addItem("England")
+    self._country_dropdown.addItem("Scotland")
+    self._male_radio = QRadioButton("Male")
+    self._female_radio = QRadioButton("Female")
+    self._male_radio.setChecked(True)
+        </pre>
+    </section>
+        
+    <section>
+        <h3>Dropdown and Radio</h3>
+        <pre class="brush: python">
+  def setup_layout(self):
+    gender_grid = QGridLayout()
+    group_box = QGroupBox("Gender")
+    gender_grid.addWidget(self._male_radio)
+    gender_grid.addWidget(self._female_radio)
+    group_box.setLayout(gender_grid)
+    
+    main_layout = QGridLayout()
+    main_layout.addWidget(self._country_dropdown, 0, 0)
+    main_layout.addWidget(group_box, 0, 1)
+    self.setLayout(main_layout)
+
+def main():
+  app = QApplication(sys.argv)
+  window = SomeWidget()
+  window.show()
+  exit_code = app.exec_()
+  sys.exit(exit_code)
+
+if __name__ == '__main__':
+    main()
+        </pre>
+    </section>
+        
+    <section>
+        <h3>File dialog</h3>
+        <img src="images/file_dialog.png" />
+    </section>
+        
+    <section>
+        <h3>File dialog</h3>
+        <pre class="brush: python">
+import sys
+from PyQt5.QtCore import *
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
+
+class FileDisplayWidget(QWidget):
+  _dialog_button = None
+  _file_text_edit = None
+  
+  def __init__(self, parent = None):
+    super().__init__(parent)
+    self.setup_widgets()
+    self.setup_layout()
+    self.setWindowTitle("File dialog")
+    
+  def setup_widgets(self):
+    self._dialog_button = QPushButton("Open file")
+    self._dialog_button.clicked.connect(self.print_file)
+    self._file_text_edit = QTextEdit()
+        </pre>
+    </section>
+        
+    <section>
+        <h3>File dialog</h3>
+        <pre class="brush: python">
+  def setup_layout(self):    
+    main_layout = QGridLayout()
+    main_layout.addWidget(self._dialog_button, 1, 0)
+    main_layout.addWidget(self._file_text_edit, 0, 0)
+    self.setLayout(main_layout)
+    
+  def print_file(self):
+    file_name, error = QFileDialog.getOpenFileName(self)
+    file = open(file_name, "r")
+    file_text = file.read()
+    file.close()
+    self._file_text_edit.setText(file_text)
+
+def main():
+  app = QApplication(sys.argv)
+  window = FileDisplayWidget()
+  window.show()
+  exit_code = app.exec_()
+  sys.exit(exit_code)
+
+if __name__ == '__main__':
+    main()
+        </pre>
+    </section>
+            
+    <section id="more-exercises">
+        <h3>If you've finished everything</h3>
+        <ul>
+            <li><a href="http://projecteuler.net/problems">number-based problems for computing</a></li>
+            <li><a href="http://rosalind.info/problems/list-view/">string-based problems for computing</a></li>
+        </ul>
+    </section>
+    
+</div> <!-- slides -->
+</div> <!-- reveal.js -->
+
+		<script src="../reveal/lib/js/head.min.js"></script>
+		<script src="../reveal/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../reveal/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../reveal/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../reveal/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

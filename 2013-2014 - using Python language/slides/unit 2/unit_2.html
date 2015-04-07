@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<title>Computer Programming</title>
+
+		<meta name="description" content="Computer Programming in Python">
+		<meta name="author" content="Colm Sloan">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<link rel="stylesheet" href="../reveal/css/reveal.css">
+		<link rel="stylesheet" href="../reveal/css/theme/default.css" id="theme">
+        <link rel="stylesheet" href="../reveal/css/killester.css">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../reveal/lib/css/zenburn.css">
+		<link rel="stylesheet" href="../reveal/lib/css/print/pdf.css">
+		
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="..reveal/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+        
+        <script type="text/javascript" src="../syntaxhighlighter_3.0.83/scripts/shCore.js"></script>
+        <script type="text/javascript" src="../syntaxhighlighter_3.0.83/scripts/shBrushPython.js"></script>
+        <link type="text/css" rel="stylesheet" href="../syntaxhighlighter_3.0.83/styles/shCoreDefault.css"/>
+        <script type="text/javascript">SyntaxHighlighter.all();</script>
+
+		<!--[if lt IE 9]>
+		<script src="../reveal/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+<div class="reveal">
+<div class="slides">
+
+    <section>
+        <h1>Computer Programming in Python</h1>
+        <p><small>by Colm Sloan</small></p>
+    </section>
+    
+    <section id="table-of-contents">
+        <h3>Table of contents</h3>
+        <ol>
+            <li><a href="#/list-intro">Introduction to lists</a></li>
+            <li><a href="#/building">Building lists</a></li>
+            <li><a href="#/accessing">Accessing lists</a></li>
+            <li><a href="#/enumeration">Altering lists</a></li>
+            <li><a href="#/random">Randomness</a></li>
+            <li><a href="#/more-exercises">More exercises</a></li>
+        </ol>
+    </section>
+    
+    <section id="list-intro">
+        <h3>What is a list?</h3>
+        <blockquote>
+            In Python, a list is a data structure containing an ordered sequence of values where each value is associated with an index denotating the values position in the sequence.
+        </blockquote>
+    </section>
+    
+    <section>
+        <h3>Lists</h3>
+        <pre class="brush: python">
+x = [3, "apples", "cats", 4.91, "apples"]
+print(x) # [3, 'apples', 'cats', 4.91, 'apples']
+        </pre>
+        <ul>
+            <li>an ordered collection of objects of any type</li>
+            <li>can be of any length, including empty</li>
+            <li>can contain duplicates</li>
+            <li>contained within square brackets</li>
+            <li>elements are separated by commas</li>
+            <li>useful for dealing with a huge number of variables</li>
+            <li>no need to create hundreds of variables</li>
+        </ul>
+    </section>
+    
+    <section id="building">
+        <h3>Adding elements to a list</h3>
+        <pre class="brush: python">
+animals = ["ape", "bison", "crocodile"]
+animals.append("dog")
+animals.append("elephant")
+print(animals)
+# prints: ['ape', 'bison', 'crocodile', 'dog', 'elephant']
+        </pre>
+        <pre class="brush: python">
+numbers = [38, 91, 22]
+numbers.append(44)
+numbers.append(7)
+print(numbers) # [38, 91, 22, 44, 7]
+        </pre>
+        <ul>
+            <li>elements can be individually added to a list</li>
+            <li>numbers can be added just the same as strings</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Adding elements to a list</h3>
+        <pre class="brush: python">
+animals = ["ape", "bison", "crocodile"]
+more_animals = ["dog", "elephant"]
+animals.append(more_animals)
+print(animals)
+# prints: ['ape', 'bison', 'crocodile', ['dog', 'elephant']]
+        </pre>
+        <ul>
+            <li>another list can bee added as an element to an existing list</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Adding elements to a list</h3>
+        <pre class="brush: python">
+animals = ["ape", "bison", "crocodile"]
+more_animals = ["dog", "elephant"]
+animals.extend(more_animals)
+print(animals)
+# prints: ['ape', 'bison', 'crocodile', 'dog', 'elephant']
+        </pre>
+        <ul>
+            <li>all of the elements in one list can be appended to another</li>
+        </ul>
+    </section>
+    
+    <section id="accessing">
+        <h3>Accessing list elements</h3>
+        <pre class="brush: python">
+animals = ["ape", "bison", "crocodile"]
+print(animals[0]) # ape
+print(animals[1]) # bison
+print(animals[2]) # crocodile
+        </pre>
+        <ul>
+            <li>individual list elements can be accessed</li>
+            <li>access an element using a number enclosed between square brackets</li>
+            <li>note that list start at number zero, not one</li>
+            <li>list_name[index_of_element] = corresponding value</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Accessing list elements</h3>
+        <pre class="brush: python">
+animals = ["ape", "bison", "crocodile"]
+print(animals[0]) # ape
+print(animals[3]) # Error: list index out of range
+        </pre>
+        <ul>
+            <li>beware of list range</li>
+            <li>going outside of the range of a list generates an error</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Visualizing a list</h3>
+        <img src="./images/list_visualization.png" />
+    </section>
+    
+    <section>
+        <h3>Accessing list elements</h3>
+        <pre class="brush: python">
+animals = ["ape", "bison", "crocodile"]
+i = 0
+while i < len(animals):
+    print(animals[i])
+    i += 1
+        </pre>
+        <ul>
+            <li>elements could be printed like so</li>
+            <li>but this is not Pythonic code</li>
+            <li>prefer for loops instead</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>List exercise 1</h3>
+        <div class="exercize_text">
+            Initialize a list with five integer values of your choice. Take an integer from the user and display whether or not the integer is present in the list. Iterate over the list using a for loop. 
+        </div>
+    </section>
+    
+    <section>
+        <h3>List exercise 1 solution</h3>
+        <pre class="brush: python">
+numbers = [4,2,7,9,3]
+found = False # we haven't found the number yet
+user_number = int(input("Enter an integer: "))
+for number in numbers:
+    if number == user_number:
+        found = True
+        break
+if found:
+    print(user_number, "is in", numbers)
+else:
+    print(user_number, "is not in", numbers)
+        </pre>
+    </section>
+    
+    <section>
+        <h3>List exercise 1 solution</h3>
+        <pre class="brush: python">
+numbers = [4,2,7,9,3]
+user_number = int(input("Enter an integer: "))
+if user_number in numbers:
+    print(user_number, "is in", numbers)
+else:
+    print(user_number, "is not in", numbers)
+        </pre>
+        <ul>
+            <li>using a for loop was mostly for learning purposes</li>
+            <li>a more Pythonic follow follow</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>List exercise 2</h3>
+        <div class="exercize_text">
+            Initialize a list with five integer values of your choice. Display the value of the integer present at index 0 plus the integer present at index 3. 
+        </div>
+    </section>
+    
+    <section>
+        <h3>List exercise 2 solution</h3>
+        <pre class="brush: python">
+numbers = [4,2,7,9,4]
+print("numbers is", numbers)
+print("numbers[0] is", numbers[0])
+print("numbers[3] is", numbers[3])
+print(numbers[0], "plus", numbers[3], "is", numbers[0] + numbers[3])
+        </pre>
+    </section>
+    
+    <section>
+        <h3>List exercise 3</h3>
+        <div class="exercize_text">
+            Initialize a list with five integer values of your choice. Take an integer from the user. Display the value present at the list index specified by the user input integer.
+        </div>
+    </section>
+    
+    <section>
+        <h3>List exercise 3 solution</h3>
+        <pre class="brush: python">
+numbers = [4,2,7,9,4]
+print("numbers is", numbers)
+index = int(input("Enter an index: "))
+print("numbers[", index,"] is", numbers[index])
+        </pre>
+    </section>
+    
+    <section>
+        <h3>List exercise 4</h3>
+        <div class="exercize_text">
+            Initialize a list with five integer values of your choice. Take an integer from the user. Display the sum of all integers in the list with an index less than or equal to the user input integer.
+        </div>
+    </section>
+    
+    <section>
+        <h3>List exercise 4 solution</h3>
+        <pre class="brush: python">
+numbers = [3, 6, 1, 4, 9]
+sum = 0
+stop_index = int(input("Enter an integer: "))
+for index in range(0, stop_index + 1, 1):
+    sum += numbers[index]
+print("sum is", sum)
+        </pre>
+    </section>
+    
+    <section id="enumeration">
+        <h3>List enumeration</h3>
+        <pre class="brush: python">
+animals = ["ape", "bison", "crocodile", "dog", "elephant"]
+for animal in animals:
+    animal = "zebra"
+print(animals)
+#prints: ['ape', 'bison', 'crocodile', 'dog', 'elephant']
+        </pre>
+        <ul>
+            <li>all list elements still have their original value</li>
+            <li>remember that <i>animal</i> is only a temporary variable</li>
+            <li>we do not alter the list value, just the temporary variable value</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>List enumeration</h3>
+        <pre class="brush: python">
+animals = ["ape", "bison", "crocodile", "dog", "elephant"]
+for index, animal in enumerate(animals):
+    animals[index] = "zebra"
+print(animals)
+#prints: ['zebra', 'zebra', 'zebra', 'zebra', 'zebra']
+        </pre>
+        <ul>
+            <li>all list element values are "zebra"</li>
+            <li><i>animal</i> is still a temporary variable holding copy of value</li>
+            <li><i>index</i> holds the index number of the list value</li>
+            <li>index starts at 0 and increases by 1 until it reaches 4 because <i>animals</i> has 5 elements</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>List exercise 5</h3> 
+        <div class="exercize_text">
+            Populate a list with 5 integers taken from the user using a while loop. After all inputs have been taken, run through the list to check if an element value is less than 10 using a for loop. If a value is less than 10, set it to 0. Finally, display the list.
+        </div>
+    </section>
+    
+    <section>
+        <h3>List exercise 5 solution</h3>
+        <pre class="brush: python">
+numbers = []
+sum = 0
+num_inputs = 0
+
+while num_inputs < 5:
+    number = int(input("Enter an integer: "))
+    numbers.append(number)
+    num_inputs += 1
+
+for index, number in enumerate(numbers):
+    if number < 10:
+        numbers[index] = 0
+print(numbers)
+        </pre>
+    </section>
+    
+    <section>
+        <h3>Graphical shapes</h3>
+        <pre class="brush: python">
+stars = "*"
+for i in range(0, 10, 1):
+    print(stars)
+    stars += "*"
+print("-.-.-.-")
+print("||||")
+print("||||")
+print("   *")
+print("  * *")
+print(" *   *")
+print("  * *")
+print("   *")
+        </pre>
+        <ul>
+            <li>some shapes printed to the console</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Simple section navigation</h3>
+        <pre class="brush: python">
+section = None
+while section != "go to sleep":
+    if section == "at home":
+        print("You are in your home")
+        section = input("Where would you like to be? ")
+    elif section == "at work":
+        print("You must use the right key to unlock your office door")
+        key = input("Use blue or red key? ")
+        if key == "blue":
+            print("You opened the office door")
+            print("You remember it's a holiday and go home")
+            section = "at home"
+    else:
+        print("You can either be 'at home' or 'at work'.")
+        section = input("Where would you like to be? ")
+        </pre>
+        <ul>
+            <li>this is a very primitive way to direct the user to different parts of the program</li>
+        </ul>
+    </section>
+    
+    <section id="random">
+        <h3>Random number generation</h3>
+        <pre class="brush: python">
+import random
+        </pre>
+        <ul>
+            <li>there are many uses for random numbers in programming</li>
+            <li>Python has a random number module in its standard library</li>
+            <li>import a module using the "import" keyword, foolowed by the module name</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Random number generation</h3>
+        <pre class="brush: python">
+import random
+rand_float_1 = random.random() # float from 0 to 1
+rand_int = random.randint(0, 10) # integer from 0 to 10
+rand_float_2 = random.uniform(0, 10) # float from 0 to 10
+rand_even_int = random.randrange(0, 11, 2) # number from 0 to 10 with steps of 2
+
+animals = ["ape", "bison", "crocodile", "dog", "elephant"]
+rand_animal = random.choice(animals)
+rand_animals = random.sample(animals, 2) # two animals
+
+print("Float from 0 to 1:", rand_float_1)
+print("Integer from 0 to 10:", rand_int)
+print("Float from 0 to 10:", rand_float_2)
+print("Even integer from 0 to 10:", rand_even_int)
+print("Random animal:", rand_animal)
+print("Two random animals:", rand_animals)
+print("Animals before shuffle:", animals)
+random.shuffle(animals)
+print("Animals after shuffle:", animals)
+        </pre>
+    </section>
+    
+    <section>
+        <h3>Random number generation exercise 1</h3>
+        <div class="exercize_text">
+            Try to guess the secret integer. The secret integer should be selected randomly at the beginning of the program and should have a value from 1 to 5. Have the user guess the secret number as many times as he likes. Inform the user if their guess is too high, low or if it's correct. Exit when the guess is correct.
+        </div>
+    </section>
+    
+    <section>
+        <h3>Random number generation exercise 1 solution</h3>
+        <pre class="brush: python">
+import random
+
+guess = -1
+secret_number = random.randint(1, 10)
+print("Guess the secret number from 1 to 10!")
+while guess != secret_number:
+    guess = int(input("Please enter your guess: "))
+    if guess > secret_number:
+        print("Too high. Try again!")
+    elif guess < secret_number:
+        print("Too low. Try again!")
+print("Correct!")
+        </pre>
+    </section>
+    
+    <section>
+        <h3>Random number generation exercise 2</h3>
+        <div class="exercize_text">
+            Modify the previous secret number program so that the user only has two incorrect guesses before losing the game. Inform the user of their success or failure.
+        </div>
+    </section>
+    
+    <section>
+        <h3>Random number generation exercise 1 solution</h3>
+        <pre class="brush: python">
+import random
+
+guess = -1
+secret_number = random.randint(1, 10)
+lives = 2
+print("Guess the secret number from 1 to 10!")
+while guess != secret_number and lives != 0:
+    print("Number of guesses left:", lives)
+    guess = int(input("Please enter your guess: "))
+    if guess > secret_number:
+        print("Too high. Try again!")
+        lives -= 1
+    elif guess < secret_number:
+        print("Too low. Try again!")
+        lives -= 1
+if lives == 0:
+    print("Game over. You lost.")
+else:
+    print("Game over. You won!")
+        </pre>
+    </section>
+    
+    <section>
+        <h3>Random number generation exercise 3</h3>
+        <div class="exercize_text">
+            Populate a list with 4 random integers from 1 to 5. Take an integer from the user. Display the values in the list and inform the user whether or not their input integer is present in the list.
+        </div>
+    </section>
+    
+    <section>
+        <h3>Random number generation exercise 4</h3>
+        <div class="exercize_text">
+            Populate a list with 10 random integers with a value of either 0 or 1. Output how many times each number occurs.
+        </div>
+    </section>
+    
+    <section>
+        <h3>Random number generation exercise 5</h3>
+        <div class="exercize_text">
+            Keep generating random numbers from 0 to 10. Count how many numbers had to be generated before the same number was generated twice in a row.
+        </div>
+    </section>
+    
+    <section>
+        <h3>Random number generation exercise 6</h3>
+        <div class="exercize_text">
+            Keep generating random numbers from 1 to 100. Only stop when a number is generated that has been generated already. Ouput the list of all generated numbers.
+        </div>
+    </section>
+        
+    <section id="more-exercises">
+        <h3>If you've finished everything</h3>
+        <ul>
+            <li><a href="http://projecteuler.net/problems">number-based problems for computing</a></li>
+            <li><a href="http://rosalind.info/problems/list-view/">string-based problems for computing</a></li>
+        </ul>
+    </section>
+</div> <!-- slides -->
+</div> <!-- reveal.js -->
+
+		<script src="../reveal/lib/js/head.min.js"></script>
+		<script src="../reveal/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../reveal/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../reveal/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../reveal/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

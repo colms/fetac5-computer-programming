@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<title>Computer Programming</title>
+
+		<meta name="description" content="Computer Programming in Python">
+		<meta name="author" content="Colm Sloan">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<link rel="stylesheet" href="../reveal/css/reveal.css">
+		<link rel="stylesheet" href="../reveal/css/theme/default.css" id="theme">
+        <link rel="stylesheet" href="../reveal/css/killester.css">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../reveal/lib/css/zenburn.css">
+		<link rel="stylesheet" href="../reveal/lib/css/print/pdf.css">
+		
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="..reveal/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+        
+        <script type="text/javascript" src="../syntaxhighlighter_3.0.83/scripts/shCore.js"></script>
+        <script type="text/javascript" src="../syntaxhighlighter_3.0.83/scripts/shBrushPython.js"></script>
+        <link type="text/css" rel="stylesheet" href="../syntaxhighlighter_3.0.83/styles/shCoreDefault.css"/>
+        <script type="text/javascript">SyntaxHighlighter.all();</script>
+
+		<!--[if lt IE 9]>
+		<script src="../reveal/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+<div class="reveal">
+<div class="slides">
+
+    <section>
+        <h1>Computer Programming in Python</h1>
+        <p><small>by Colm Sloan</small></p>
+    </section>
+    
+    <section id="table-of-contents">
+        <h3>Table of contents</h3>
+        <ol>
+            <li><a href="#/procedures">Procedures</a></li>
+            <li><a href="#/functions">Functions</a></li>
+            <li><a href="#/scope">Scope</a></li>
+            <li><a href="#/main">The main function</a></li>
+            <li><a href="#/more-exercises">More exercises</a></li>
+        </ol>
+    </section>
+    
+    <section id="procedures">
+        <h3>Procedure</h3>
+        <ul>
+            <li>a function is an ordered sequence of statements</li>
+            <li>a procedure is a type of function that does not return a value</li>
+            <li>used to reduce code duplication</li>
+            <li>used to increase code reusability</li>
+            <li>used to increase code readability</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Procedure example</h3>
+        <pre class="brush: python">
+def greet_user(): # define procedure
+    print("Hello there!")
+    print("Nice to meet you!")
+    
+greet_user() # call procedure
+        </pre>
+        <ul>
+            <li><i>def</i> keyword followed by procedure name, parameters and colon</li>
+            <li>all indented code belongs to procedure</li>
+            <li>invoke procedure by writing procedure name with correct number of arguments</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Parameterized procedure example</h3>
+        <pre class="brush: python">
+def print_double(x):
+    print(x * 2)
+
+print_double(3) # call procedure
+print_double(5)
+print_double(20)
+        </pre>
+        <ul>
+            <li>parameters are variables that must be passed into a function when it is called</li>
+            <li>arguments are the values passed to a function when calling it</li>
+            <li>parameters and arguments are inside parentheses</li>
+            <li>in <i>print_double(3)</i>, 3 is the argument</li>
+            <li>notice that the number of arguments match the number of parameters</li>
+            <li>in <i>def print_double(x)</i>, <i>x</i> is the parameter</li>
+            <li>the parameter takes the value of the argument, e.g. <i>x</i> will have a value of 3 here for the first procedure call</li>
+            <li>functions can be called as many times as you like</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Parameterized procedure example</h3>
+        <pre class="brush: python">
+def print_lowercase(x):
+    print(x.lower())
+
+print_lowercase("HeLlO") # "hello"
+print_lowercase(5) # crash: 'int' object has no attribute 'lower'
+        </pre>
+        <ul>
+            <li>parameters must be of the right </li>
+            <li>a string function can't be called on an integer</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Procedure exercise 1</h3>
+        <div class="exercize_text">
+            Define and call a procedure with no parameters that adds 2 and 3 and prints the result.
+        </div>
+    </section>
+    
+    <section>
+        <h3>Procedure exercise 1 solution</h3>
+         <pre class="brush: python">
+def add():
+    print(2 + 3)
+    
+add()
+        </pre>
+    </section>
+    
+    <section>
+        <h3>Parameterized procedure example</h3>
+        <pre class="brush: python">
+def bottles_lyric(num_bottles): # define procedure
+    print(num_bottles, "bottles of beer on the wall.")
+    print(num_bottles, "bottles of beer.")
+    print("You take one down and pass it around ... ")
+    print(num_bottles - 1, "bottles of beer on the wall.")
+    
+bottles_lyric(10) # call procedure
+bottles_lyric(9) # call procedure
+bottles_lyric(8) # call procedure
+        </pre>
+        <ul>
+            <li>in <i>bottles_lyric(10)</i>, 10 is the argument</li>
+            <li>in <i>def bottles_lyric(num_bottles)</i>, <i>num_bottles</i> is the parameter</li>
+            <li>the parameter takes the value of the argument, e.g. <i>num_bottles</i> will have a value of 10 here</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Procedure exercise 2</h3>
+        <div class="exercize_text">
+            Write a program to print all of the lyrics to the "bottles of bet on the wall" song, stating with 100 bottles.
+        </div>
+    </section>
+    
+    <section>
+        <h3>Procedure exercise 2 solution</h3>
+         <pre class="brush: python">
+def bottles_lyric(num_bottles): # define procedure
+    print(num_bottles, "bottles of beer on the wall.")
+    print(num_bottles, "bottles of beer.")
+    print("You take one down and pass it around ... ")
+    print(num_bottles - 1, "bottles of beer on the wall.")
+    
+for i in range(100, 0, -1):
+    bottles_lyric(i)
+        </pre>
+    </section>
+    
+    <section>
+        <h3>Function naming conventions</h3>
+        <ul>
+            <li>a function should be named according to what it does</li>
+            <li>if it’s hard to accurately name a function, it probably means it’s doing too much and should be broken into multiple functions</li>
+            <li>follow the verb_noun system when possible e.g. get_lives, load_file</li>
+            <li>functions should be no longer than n statements where n is defined in style guide</li>
+            <li>consider that webkit functions contain on average 2.1 statements, firefox 6.7 and IE 7.1</li>
+            <li>http://aptiverse.com/blog/closer_look_at_chrome/</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Procedure exercise 3</h3>
+        <div class="exercize_text">
+            Write a program to print the square of any number the user inputs. The number to be squared should be a parameter to the "print_square" procedure.
+        </div>
+    </section>
+    
+    <section>
+        <h3>Procedure exercise 3 solution</h3>
+         <pre class="brush: python">
+def print_square(x):
+    print(x * x)
+
+user_input = int(input("Input number to be squared: "))
+print_square(user_input)
+        </pre>
+    </section>
+    
+    <section>
+        <h3>Procedure exercise 4</h3>
+        <div class="exercize_text">
+            Write a program that calls a procedure called "log" that appends a string to a file called "my_log.log". Call the procedure with several different strings.
+        </div>
+    </section>
+    
+    <section>
+        <h3>Procedure exercise 4 solution</h3>
+         <pre class="brush: python">
+def log(entry):
+    log_file = open("my_log.log", "a")
+    print(entry, file=log_file)
+    log_file.close()
+
+log("Test")
+log("me")
+log("out")
+        </pre>
+    </section>
+    
+    <section>
+        <h3>Parameterized procedure with multiple parameters</h3>
+        <pre class="brush: python">
+def display_sum(x, y):
+    print("The sum of", x, "and", y, "is", x + y)
+    
+display_sum(2,3)
+        </pre>
+        <ul>
+            <li>arguments are assigned to parameters in order, e.g. x becomes 2, y becomes 3</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Procedure exercise 5</h3>
+        <div class="exercize_text">
+             Write a program with a procedure that subtracts and divides its two number parameters and logs the results of each calculation. You don't need to write your own procedure just to subtract etc.
+        </div>
+    </section>
+    
+    <section>
+        <h3>Procedure exercise 5 solution</h3>
+         <pre class="brush: python">
+def log_calc(x, y):
+    log_file = open("my_calc_log.log", "a")
+    entry = str(x - y) + "," + str(x / y)
+    print(entry, file=log_file)
+    log_file.close()
+
+log_calc(10, 2)
+        </pre>
+    </section>
+    
+    <section>
+        <h3>Procedure exercise 6</h3>
+        <div class="exercize_text">
+             Write a program with a procedure with two parameters that tells the user if the first or second parameter is the biggest of the two, or if they're equal in size.
+        </div>
+    </section>
+    
+    <section>
+        <h3>Procedure exercise 6 solution</h3>
+         <pre class="brush: python">
+def print_highest(x, y):
+    if x > y:
+        print("The first parameter is the highest")
+    elif y > x:
+        print("The second parameter is the highest")
+    else:
+        print("The parameters have equal value")
+        
+print_highest(1, 2)
+print_highest(1, 1)
+print_highest(2, 1)
+        </pre>
+    </section>
+    
+    <section>
+        <h3>Procedure exercise 7</h3>
+        <div class="exercize_text">
+             Write a procedure that prints the absolute value of any number passed as an argument.
+        </div>
+    </section>
+    
+    <section>
+        <h3>Procedure exercise 7 solution</h3>
+         <pre class="brush: python">
+def print_absolute(x):
+    if x < 0:
+        print(x * -1)
+    else:
+        print(x)
+        
+print_absolute(3)
+print_absolute(0)
+print_absolute(-3)
+        </pre>
+    </section>
+    
+    <section id="functions">
+        <h3>Functions</h3>
+        <ul>
+            <li>a function is an ordered sequence of statements</li>
+            <li>a function returns a value</li>
+            <li>used to reduce code duplication</li>
+            <li>used to increase code reusability</li>
+            <li>used to increase code readability</li>
+        </ul>
+        <figure>
+            <img src="./images/function.png" />
+            <figcaption>source: Webopedia</figcaption>
+        </figure>
+    </section>
+    
+    <section>
+        <h3>Function example</h3>
+        <pre class="brush: python">
+def double(x):
+    return x * 2
+
+doubled = double(3)
+print("double 3 is", doubled)
+quadrupled = double(doubled)
+print("quadrupled 3 is", quadrupled)
+        </pre>
+        <ul>
+            <li>the <i>return</i> keyword precedes the values returned from the function</li>
+            <li>right hand side of equals is evaluated first</li>
+            <li>imagine the function on the right hand side of the equals simply becoming the value</li>
+            <li>value is assigned to variable as per usual</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Function example</h3>
+        <pre class="brush: python">
+def add(x, y):
+    return x + y
+
+sum = add(2, 3)
+print("sum is", sum)
+        </pre>
+        <ul>
+            <li>functions can have multiple parameters too</li>
+            <li><i>add</i> is a user defined function</li>
+            <li><i>str</i> and <i>len</i> are functions from the standard library</li>
+            <li><i>randint</i> is a function from the <i>random</i> module</li>
+            <li>list of standard library functions: http://docs.python.org/3/library/functions.html</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Function example</h3>
+        <pre class="brush: python">
+def expand_letter_to_gender(letter):
+    if letter == 'm':
+        return "male"
+    elif letter == 'f':
+        return "female"
+    else:
+        return "null"
+        
+john = expand_letter_to_gender('m')
+joan = expand_letter_to_gender('f')
+zorbak = expand_letter_to_gender('q')
+print("john is", john)
+print("joan is", joan)
+print("zorbak is", zorbak)
+        </pre>
+        <ul>
+            <li>functions can have multiple possible return values</li>
+        </ul>
+        <figure>
+            <img src="./images/gender_function.png" />
+        </figure>
+    </section>
+    
+    <section>
+        <h3>Function exercise 1</h3>
+        <div class="exercize_text">
+             Write a function that takes two integers as input. The function should return the largest of the two integers. 
+        </div>
+    </section>
+    
+    <section>
+        <h3>Function exercise 1 solution</h3>
+         <pre class="brush: python">
+def find_highest(x, y):
+    highest = None
+    if x > y:
+        highest = x
+    elif y > x:
+        highest = y
+    else:
+        highest = x # just pick one
+    return highest
+        
+print(find_highest(1, 2))
+print(find_highest(1, 1))
+print(find_highest(2, 1))
+        </pre>
+    </section>
+    
+    <section>
+        <h3>Function exercise 2</h3>
+        <div class="exercize_text">
+             Write a function that converts centimeters to inches. Lookup conversion formula on Wikipedia if you don't know it.
+        </div>
+    </section>
+    
+    <section>
+        <h3>Function exercise 2 solution</h3>
+         <pre class="brush: python">
+def cm_to_inches(cm):
+    return cm * 0.393
+    
+cms = 3
+inches = cm_to_inches(cms)
+print(cms, "centimeters is", inches, "inches")
+        </pre>
+    </section>
+    
+    <section>
+        <h3>Function exercise 3</h3>
+        <div class="exercize_text">
+             Write a function that converts kilograms to pounds.
+        </div>
+    </section>
+    
+    <section>
+        <h3>Function exercise 2 solution</h3>
+         <pre class="brush: python">
+def kg_to_pounds(kg):
+    return kg * 2.204
+    
+kg = 80
+pounds = kg_to_pounds(kg)
+print(kg, "kilos is", pounds, "pounds")
+        </pre>
+    </section>
+    
+    <section>
+        <h3>Function exercise 4</h3>
+        <div class="exercize_text">
+             Create a function <i>calculate_bmi_metric(weight_kg, height_cm)</i> that returns the BMI of the user input it receives. Write another function <i>find_bmi_category(bmi)</i> that returns the weight category for that BMI e.g. "underweight". Write a procedure, <i>display_bmi_metric(weight_kg, height_cm)</i>, to display all information reagrding BMI. Both <i>calculate_bmi_metric</i> and <i>find_bmi_category</i> should be called from within <i>display_bmi_metric</i>.
+        </div>
+    </section>
+    
+    <section>
+        <h3>Function exercise 5</h3>
+        <div class="exercize_text">
+             Build upon the previous program to create a function <i>calculate_bmi_imperial(weight_pounds, height_inches)</i> and a procedure <i>display_bmi_imperial(weight_pounds, height_inches)</i>. Give the user the option of using either metric or imperial measurements.
+        </div>
+    </section>
+    
+    <section>
+        <h3>Function exercise 6</h3>
+        <div class="exercize_text">
+             Write a function that accepts a string and returns the string with letter case inverted e.g. "hEllO" becomes "HeLLo".
+        </div>
+    </section>
+    
+    <section>
+        <h3>Function exercise 7</h3>
+        <div class="exercize_text">
+             Write a function that counts the number of times a substring occurs in a string e.g. the number of times "is" occurs in "is it this or isn't it?". Fell free to use standard library functions.
+        </div>
+    </section>
+    
+    <section id="scope">
+        <h3>Scope in Python</h3>
+        <blockquote>
+            The scope of an identifier is the part of a computer program where the identifier, a name that refers to some entity in the program, can be used to find the referred entity.
+            <cite>Wikipedia</cite>
+        </blockquote>
+        <blockquote>
+            Scope is an enclosing context where values and expressions are associated.
+            <cite>Princeton</cite>
+        </blockquote>
+    </section>
+    
+    <section>
+        <h3>Scope in Python</h3>
+        <ul>
+            <li>functions</li>
+            <li>generator expressions</li>
+            <li>classes</li>
+            <li>modules</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Function scope</h3>
+        <pre class="brush: python">
+def print_double(x):
+    x *= 2
+    print(x) # x no longer exists after this statement
+    
+i = 0
+while i < 10:
+    print_double(i)
+    i += 1
+
+print("i after while loop is", i)
+        </pre>
+    </section>
+    
+    <section>
+        <h3>Function scope</h3>
+        <pre class="brush: python">
+def print_double(x):
+    y = x * 2
+    print(y) # x and y no longer exist after this statement
+    
+i = 0
+while i < 10:
+    print_double(i)
+    i += 1
+
+print("i after while loop is", i)
+        </pre>
+    </section>
+    
+    <section>
+        <h3>Function scope</h3>
+        <pre class="brush: python">
+def print_double(i):
+    # Changing this i has no effect on other i
+    # this i has function scope and is destroyed
+    # after the function call is finished.
+    i *= 2
+    print(i)
+    
+i = 0
+while i < 10:
+    print_double(i)
+    i += 1
+
+print("i after while loop is", i)
+        </pre>
+    </section>
+    
+    <section>
+        <h3>Module scope</h3>
+        <pre class="brush: python">
+def print_double():
+    # Changing this i actually changes the other i.
+    global i
+    i *= 2
+    print(i)
+    
+i = 0
+while i < 10:
+    print_double()
+    i += 1
+
+print("i after while loop is", i)
+        </pre>
+        <ul>
+            <li><i>global</i> keyword is applied to a module scope variable to allow its mutation in local context</li>
+            <li>global variables can be really useful</li>
+            <li>but they can make code much harder to reason about</li>
+            <li>much more state must be remebered and considered when using globals</li>
+            <li>order of function calls matter</li>
+        </ul>
+    </section>
+    
+    <section id="main">
+        <h3>the main function</h3>
+        <pre class="brush: python">
+def main():
+    print("In main function")
+
+if __name__ == "__main__":
+    main()
+        </pre>
+        <ul>
+            <li><i>__name__</i> is a special global variable in Python</li>
+            <li>if a script is executed directly, <i>__name__</i> is <i>__main__</i></li>
+            <li>ensures that only YOUR main function is executed</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>the main function</h3>
+        <pre class="brush: python">
+import random
+
+print(__name__) # __main__
+print(random.__name__) # random
+        </pre>
+        <ul>
+            <li>if a script is imported, <i>__name__</i> is the name of that script/module</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>the main function</h3>
+        <pre class="brush: python">
+def main():
+    print("In main function")
+
+if __name__ == "__main__":
+    main()
+        </pre>
+        <ul>
+            <li>code is often packaged into modules</li>
+            <li>all code in imported module is executed</li>
+            <li>this could mean simply importing a module executes prints etc.</li>
+            <li>executing code other than function definitions is considered bad practice</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>the main function</h3>
+        <pre class="brush: python">
+import sys
+
+def main(argv):
+    # consider using argparse module
+    print(argv)
+
+if __name__ == "__main__":
+    main(sys.argv)
+        </pre>
+        <ul>
+            <li>main function often used to take command line arguments</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>the main function</h3>
+        <pre class="brush: python">
+def add(x, y):
+    return x + y
+
+def main():
+    sum = add(2, 3)
+    print("sum is", sum)
+
+if __name__ == "__main__":
+    main()
+        </pre>
+        <ul>
+            <li>code in main is executed as per usual</li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Creating our own module</h3>
+        <pre class="brush: python">
+def print_double(x):
+    print(x * 2)
+        </pre>
+        <ul>
+            <li>save code as "useless_printer.py"</li>
+        </ul>
+    </section>
+                
+    <section id="more-exercises">
+        <h3>If you've finished everything</h3>
+        <ul>
+            <li><a href="http://projecteuler.net/problems">number-based problems for computing</a></li>
+            <li><a href="http://rosalind.info/problems/list-view/">string-based problems for computing</a></li>
+        </ul>
+    </section>
+    
+</div> <!-- slides -->
+</div> <!-- reveal.js -->
+
+		<script src="../reveal/lib/js/head.min.js"></script>
+		<script src="../reveal/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../reveal/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../reveal/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../reveal/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

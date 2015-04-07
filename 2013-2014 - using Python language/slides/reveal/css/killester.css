@@ -1,0 +1,37 @@
+.reveal ul {
+	margin-bottom: 1em;
+    clear: both;
+}
+
+.reveal h4 {
+	clear: both;
+}
+
+.reveal img {
+	border-width: 0;
+	border-style: none;
+}
+
+.reveal blockquote cite {
+	font-size: 0.8em;
+	display: block;
+}
+ 
+.reveal blockquote cite:before {
+	content: "\2014 \2009";
+}
+
+textarea {
+    font-size: 50px;
+}
+
+.exercize_text
+{
+    text-align: left;
+}
+
+.content-link
+{
+    position: absolute;
+    bottom: 0;
+}
